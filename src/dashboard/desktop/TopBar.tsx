@@ -1,4 +1,4 @@
-import { AppShell, Container, Group, Text } from "@mantine/core";
+import { AppShell, Group } from "@mantine/core";
 import TopBarButton from "./TopBarButton";
 
 export function TopBar() {
@@ -12,6 +12,7 @@ export function TopBar() {
                     <TopBarButton>news</TopBarButton>
                     <TopBarButton>peak</TopBarButton>
                     <TopBarButton>menu</TopBarButton>
+                    <TopBarButton>courses</TopBarButton>
                 </Group>
             </AppShell.Header>
         </AppShell>

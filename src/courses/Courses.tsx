@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
+import { useMediaQuery } from "@mantine/hooks";
+import { TopBar as MobileTopBar } from "../dashboard/mobile/TopBar";
+import { TopBar as DesktopTopBar } from "../dashboard/desktop/TopBar";
+
 import Card from "./Card";
 
 export default function Courses() {
     const [courses, setCourses] = useState<JSX.Element[]>([]);
     const [loading, setLoading] = useState(true);
+    const isMobile = useMediaQuery("(max-width: 600px)");
 
     useEffect(() => {
         async function fetchCourses() {
@@ -36,7 +41,9 @@ export default function Courses() {
 
     return (
         <div>
+            {isMobile ? <MobileTopBar /> : <DesktopTopBar />}
             {loading ? <p>Loading courses...</p> : courses}
+
             {/* <Card
                 // key={index}
                 classStatus={"Open"}

@@ -14,7 +14,7 @@ const Card: React.FC<CardProps> = ({ classStatus, className, instructor, locatio
     return (
         <div className="cardParent">
             <div className="card">
-                <h3 style={}>{classStatus} {className}</h3>
+                <h3>{classStatus} {className}</h3>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
