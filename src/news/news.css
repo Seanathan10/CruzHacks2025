@@ -1,3 +1,4 @@
+/* ======= Global Layout Reset ======= */
 html, body {
   margin: 0;
   padding: 0;
@@ -17,6 +18,7 @@ html, body {
   z-index: 1000;
 }
 
+/* ======= Main Layout Below TopBar ======= */
 .RssFeedMain {
   position: absolute;
   top: 50px;
@@ -30,6 +32,7 @@ html, body {
   background-color: var(--bg-color);
 }
 
+/* ======= Sidebar Styling ======= */
 .SideBar {
   width: 280px;
   padding: 1.5rem 1rem;
@@ -68,6 +71,7 @@ html, body {
   margin: 0;
 }
 
+/* ======= Feed Container ======= */
 .RSS_Feed {
   flex: 1;
   height: 100%;
@@ -90,21 +94,17 @@ html, body {
   color: var(--text-color);
 }
 
+/* ======= Feed Item Cards ======= */
 .RSS_FeedItem {
   background-color: var(--card-bg);
   padding: 1.25rem 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.3s ease, transform 0.3s ease, border 0.3s ease, opacity 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border 0.3s ease;
   opacity: 0;
-  transform: translateY(10px) scale(1.5);
+  transform: translateY(0) scale(1);
   border: 1px solid transparent;
   will-change: transform, box-shadow, border;
-  animation: fadeInUp 0.5s ease forwards;
-  animation-delay: var(--delay, 0s);
-}
-
-.RSS_FeedItem.Animate {
   animation: fadeInUp 0.5s ease forwards;
   animation-delay: var(--delay, 0s);
 }
