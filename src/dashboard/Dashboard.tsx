@@ -1,4 +1,3 @@
-import {MantineProvider} from "@mantine/core";
 import Courses from "./Courses";
 import FoodMenu from "./FoodMenu";
 import News from "./news/News";

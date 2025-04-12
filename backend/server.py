@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, HTTPException
 from . import scraper
 import urllib.parse
+from backend import news
 # from fastapi.middleware.cors import CORSMiddleware
 
 api: FastAPI = FastAPI()
@@ -40,3 +41,5 @@ async def getAllCourses(
 @api.get("/test")
 async def getPath():
     return {"hello": "world"}
+
+api.include_router(news.router)
