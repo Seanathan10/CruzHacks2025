@@ -6,16 +6,21 @@ import { MantineProvider } from '@mantine/core';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import RssFeed from './news/news.tsx';
 import Peak from './peak';
+import Menu from './menu/Menu.tsx';
 import {Context} from './Context.tsx';
-import { useMediaQuery } from '@mantine/hooks';
 
 import Courses from './courses/Courses.tsx';
+import { useEffect, useState } from 'react';
 
 
 function App() {
-  const contextValues = {mobile: useMediaQuery('(max-width: 600px)')};
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    setMobile(window.innerWidth < 600);
+  }, []);
+  // const contextValues = {mobile: useMediaQuery('(max-width: 600px)')};
   return (
-    <Context.Provider value={contextValues}>
+    <Context.Provider value={{mobile: mobile}}>
       <MantineProvider>
         <BrowserRouter>
           <Routes>
@@ -23,6 +28,7 @@ function App() {
             <Route path='/news' element={<RssFeed />} />
             <Route path='/peak' element={<Peak />} />
             <Route path='/courses' element={<Courses />} />
+            <Route path='/menu' element={<Menu />} />
           </Routes>
         </BrowserRouter>
       </MantineProvider>
