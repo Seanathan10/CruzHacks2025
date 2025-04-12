@@ -4,7 +4,7 @@ import DateHeader from "../DateHeader.tsx";
 import MealHeader from "../MealHeader.tsx";
 import FoodBlock from "../FoodBlock.tsx";
 
-export function Menu() {
+export function Menu({children}: {children: any}) {
     const contextValues = useContext(Context);
     return (
         <>

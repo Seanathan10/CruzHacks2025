@@ -8,8 +8,34 @@ import 'swiper/css';
 
 const foodList: any = {display: 'flex', gap: "5px", flexWrap: 'wrap', justifyContent: 'center'};
 
-export function Menu() {
+export function Menu({children}: {children: any}) {
     const contextValues = useContext(Context);
+    const menuArray = Object.entries(children);
+    console.log('child entries', menuArray);
+    return (
+        <>
+            <Swiper slidesPerView={1} spaceBetween={0}
+                allowSlideNext={!contextValues?.drawer} allowSlidePrev={!contextValues?.drawer}
+            >
+                <SwiperSlide key='Cowell/Stevenson'>
+                    <DateHeader>Wednesday, January 6, 2021</DateHeader>
+                    {menuArray.map((meal: any) => <>
+                        <MealHeader key={meal[0]}>{meal[0]}</MealHeader>
+                        {Object.entries(meal[1]).map((subcategory: any) => <>
+                            <div key={subcategory[0]}>{subcategory[0]}</div>
+                            <div style={foodList}>
+                                {Object.entries(subcategory[1]).map((item: any) => 
+                                    <FoodBlock key={item[0]}>{item[0]}</FoodBlock>
+                                )}
+                            </div>
+                        </>)}
+                        {/* <div key={item[1]}>{item}</div> */}
+                    </>
+                    )}
+                </SwiperSlide>
+            </Swiper>
+        </>
+    );
     return (
         <>
             <Swiper slidesPerView={1} spaceBetween={0}
