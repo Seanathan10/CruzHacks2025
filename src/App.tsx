@@ -1,7 +1,5 @@
 import './App.css'
-import '@mantine/core/styles.css';
 import Dashboard from './dashboard/Dashboard';
-import { MantineProvider } from '@mantine/core';
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import RssFeed from './news/news.tsx';
@@ -21,17 +19,15 @@ function App() {
   // const contextValues = {mobile: useMediaQuery('(max-width: 600px)')};
   return (
     <Context.Provider value={{mobile: mobile}}>
-      <MantineProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Dashboard />} />
-            <Route path='/news' element={<RssFeed />} />
-            <Route path='/peak' element={<Peak />} />
-            <Route path='/courses' element={<Courses />} />
-            <Route path='/menu' element={<Menu />} />
-          </Routes>
-        </BrowserRouter>
-      </MantineProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/news' element={<RssFeed />} />
+          <Route path='/peak' element={<Peak />} />
+          <Route path='/courses' element={<Courses />} />
+          <Route path='/menu' element={<Menu />} />
+        </Routes>
+      </BrowserRouter>
     </Context.Provider>
   );
 }
