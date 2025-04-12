@@ -1,41 +1,39 @@
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import './App.css';
-
 import RssFeed from './news/news';
 import Peak from './peak';
-
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/news">News</Link></li>
-          <li><Link to="/peak">Peak</Link></li>
-        </ul>
-      </nav>
+      <div>
+        <header style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          background: "#1e1e1e",
+          padding: "1rem",
+          display: "flex",
+          gap: "1.5rem",
+          zIndex: 1000,
+          borderBottom: "1px solid #333"
+        }}>
+          <Link to="/" style={{ color: "white", textDecoration: "none" }}>Home</Link>
+          <Link to="/news" style={{ color: "white", textDecoration: "none" }}>News</Link>
+          <Link to="/peak" style={{ color: "white", textDecoration: "none" }}>Peak</Link>
+        </header>
 
-      <Routes>
-        <Route path="/" element={
-          <div>
-            <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-              <img src="/vite.svg" className="logo" alt="Vite logo" />
-            </a>
-            <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-              <img src="/react.svg" className="logo react" alt="React logo" />
-            </a>
-          </div>
-        } />
-        <Route path="/news" element={<RssFeed />} />
-        <Route path="/peak" element={<Peak />} />
-      </Routes>
+        <main style={{ padding: "5rem 1rem 1rem" }}>
+          <Routes>
+            <Route path="/" element={
+              <h1>Home Page</h1>
+            } />
+            <Route path="/news" element={<RssFeed />} />
+            <Route path="/peak" element={<Peak />} />
+          </Routes>
+        </main>
+      </div>
     </BrowserRouter>
   );
 }
