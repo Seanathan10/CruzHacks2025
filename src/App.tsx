@@ -9,7 +9,7 @@ import RssFeed from './news/News.tsx';
 import Peak from './peak';
 import {Context} from './Context.tsx';
 import { useMediaQuery } from '@mantine/hooks';
-import Menu from './menu/menu.tsx';
+// import Menu from './menu/menu.tsx';
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Dashboard />} />
             <Route path='/news' element={<RssFeed />} />
-            <Route path='/menu' element={<Menu />} />
+            {/* <Route path='/menu' element={<Menu />} /> */}
             <Route path='/peak' element={<Peak />} />
           </Routes>
         </BrowserRouter>
