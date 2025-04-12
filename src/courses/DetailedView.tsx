@@ -1,89 +1,110 @@
-import { AnchorStylesNames } from "@mantine/core";
 import React from "react"
+import './DetailedView.css';
+import { statusEmoji } from './Card.tsx';
 
 interface DetailedViewProps {
     details: string,
-    // instructor: string,
-    // location: string,
-    // time: string,
+    modality: string
 }
 
-const DetailedView: React.FC<DetailedViewProps> = ({ details }) => {
+function classDetailsGridEntry(title: string, content: string) {
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontWeight: '500', color: '#6c757d', fontSize: '0.9rem' }}>{title}</span>
+            <span style={{ fontSize: '1.1rem' }}>{content}</span>
+        </div>
+    )
+}
+
+const DetailedView: React.FC<DetailedViewProps> = ({ details, modality }) => {
     const detailsObj = JSON.parse(details);
-    console.log(detailsObj)
+    const spacer = (<div style={{height: '0px', margin: '20px 0'}}></div>)
 
     return (
-        <div className="parent" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="parent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'left' }}>
+            {spacer}
+
+            <div>
+                <h3>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
+            </div>
+
+
             {detailsObj.primary_section &&
                 <div className="classDetails">
-                    <h3>Class Details</h3>
-                    <p>Status: {detailsObj.primary_section.enrl_status}</p>
-                    <p>Capacity: {detailsObj.primary_section.capacity}</p>
-                    <p>Total: {detailsObj.primary_section.enrl_total}</p>
-                    <p>Waitlist: {detailsObj.primary_section.waitlist_capacity}</p>
+                    <h3 className="heading">Class Details</h3>
+                    <div className="classDetailsGrid">
+                        {classDetailsGridEntry("Status", detailsObj.primary_section.enrl_status)}
+                        {classDetailsGridEntry("Capacity", detailsObj.primary_section.capacity)}
+                        {classDetailsGridEntry("Total", detailsObj.primary_section.enrl_total)}
+                        {classDetailsGridEntry("Waitlist", detailsObj.primary_section.waitlist_capacity)}
+                        {classDetailsGridEntry("Credits", detailsObj.primary_section.credits)}
+                        {classDetailsGridEntry("GenEd", detailsObj.primary_section.gened || "None")}
+                        {classDetailsGridEntry("Modality", modality)}
+                        {classDetailsGridEntry("Class ID", detailsObj.primary_section.class_nbr)}
+                    </div>
                 </div>}
+
             {detailsObj.primary_section.description &&
-                <div className="description">
-                    <h3>Description</h3>
-                    <p>{detailsObj.primary_section.description}</p>
+                <div className="description classDetails">
+                    <h3 className="heading">Description</h3>
+                    <p>{detailsObj.primary_section.description || "None"}</p>
                 </div>}
-            <div className="enrollmentReq">
-                <h3>Requirements</h3>
-                <p>{detailsObj.primary_section.requirements}</p>
+            <div className="enrollmentReq classDetails">
+                <h3 className="heading">Requirements</h3>
+                <p>{detailsObj.primary_section.requirements || "None"}</p>
             </div>
             {detailsObj.notes &&
-                <div className="notes">
-                    <h3>Notes</h3>
+                <div className="notes classDetails">
+                    <h3 className="heading">Notes</h3>
                     <p>{detailsObj.notes}</p>
                 </div>
             }
             {detailsObj.meetings &&
-                <div>
-                <h3>Meeting Times</h3>
-                {detailsObj.meetings.map((meeting: any, _: number) => {
-                    return (
-                        <>
-                            <p>Day and Times: {meeting.days} {meeting.start_time}-{meeting.end_time}</p>
-                            <p>Location: {meeting.location}</p>
-                            <p>Instructor(s): </p>{meeting.instructors.map((instructor: any, _: number) => {
-                                return instructor.name;
-                            })}
-                        </>
-                    )
-                })}
-            </div>}
+                <div
+                    className="meetings classDetails">
+                    <h3 className="heading">Meeting Times</h3>
+                    {detailsObj.meetings.map((meeting: any, index: number) => {
+                        return (
+                            <div key={index} style={{ marginBottom: '15px' }}>
+                                <p><strong>Day and Times:</strong> {meeting.days} {meeting.start_time}-{meeting.end_time}</p>
+                                <p><strong>Location:</strong> {meeting.location}</p>
+                                <p><strong>Instructor(s):</strong> {meeting.instructors.map((instructor: any, i: number) =>
+                                    <span key={i}>{instructor.name}{i < meeting.instructors.length - 1 ? ', ' : ''}</span>
+                                )}</p>
+                            </div>
+                        )
+                    })}
+                </div>}
             {detailsObj.secondary_sections &&
-                <div className="sections">
-                    <h3>Sections</h3>
-                    {detailsObj.secondary_sections.map((section: any, _: number) => {
-                        if (!section.meetings) return;
+                <div className="sections classDetails">
+                    <h3 className="heading">Sections</h3>
+                    {detailsObj.secondary_sections.map((section: any, index: number) => {
+                        if (!section.meetings) return null;
 
                         return (
-                            <div>
-                                {section.meetings.map((meeting: any, _: any) => {
-                                    return (
-                                        <>
-                                            <p>Day and Times: {meeting.days} {meeting.start_time}-{meeting.end_time}</p>
-                                            <p>Location: {meeting.location}</p>
-                                        </>
-                                    );
-                                })}
-                                <p>{section.enrl_status} Enrolled: {section.enrl_total}/{section.capacity}</p>
+                            <div key={index} className="section-card" style={{ 
+                                borderRadius: '8px',
+                            }}>
+                                {index > 0 && <hr style={{ margin: '0 0 15px 0', borderTop: '1px solid #dee2e6' }} />}
+                                <div style={{ marginBottom: '10px' }}>
+                                    <p style={{ margin: '-8px 0' }}>
+                                        {statusEmoji(section.enrl_status)}Enrolled: {section.enrl_total}/{section.capacity}
+                                    </p>
+                                </div>
+                                <div>
+                                    {section.meetings.map((meeting: any, i: number) => (
+                                        <div key={i} style={{ margin: '8px 0' }}>
+                                            <p style={{ margin: '2px 0' }}><strong>Day and Times:</strong> {meeting.days} {meeting.start_time}-{meeting.end_time}</p>
+                                            <p style={{ margin: '2px 0' }}><strong>Location:</strong> {meeting.location}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         );
                     })}
                 </div>}
 
-                {/* because adding padding in any way royally fucks up the text and causes it to either not be scrollable or cut off */}
-                {/* stupid workaround that inexplicably works*/}
-                <div style={{
-                    width: '300px',
-                    height: '20px',
-                    backgroundColor: 'rgba(0, 0, 0, 0.0)',
-                    // border: '1px solid rgba(0, 0, 0, 0.2)',
-                    margin: '20px auto'
-                }}>
-                </div>
+            {spacer}
         </div>
     );
 }

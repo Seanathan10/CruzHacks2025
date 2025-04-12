@@ -1,37 +1,40 @@
-.courses-page {
+.parent {
+    display: flex;
+    width: 100%;
+}
+
+.contentLeft {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-}
-
-.topbar-container {
-    width: 100%;
-    padding-bottom: 30px;;
-}
-
-.parent {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    overflow: hidden;
+    width: 30%;
+    height: calc(100vh - 60px); /* Adjust based on topbar height */
+    padding: 10px;
+    align-items: center;
+    /* border-right: 1px solid #e0e0e0; */
 }
 
 .courseList {
-    width: 30%;
-    padding: 10px;
+    flex: 1;
     overflow-y: auto;
-    height: 100%;
-    /* padding-top: 80px; */
+    margin-top: 50px;
+    width: 100%;
+}
+
+.search-wrapper {
+    width: 83%;
+    /* align-items: center; */
+    padding-right: 23px;
+}
+
+.courses-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .contentRight {
-    width: 70%;
-    padding: 15px;
-    /* background-color: #0000FF; */
+    flex: 1;
+    padding: 10px;
+    height: calc(100vh - 60px);
     overflow-y: auto;
-    height: 100%;
-    /* padding-top: 30px; */
-    /* padding-bottom: 80px; */
 }
