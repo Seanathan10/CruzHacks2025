@@ -1,7 +1,7 @@
 const style = {
     background: 'gold',
     color: 'black',
-    width: '145px',
+    width: '180px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap'

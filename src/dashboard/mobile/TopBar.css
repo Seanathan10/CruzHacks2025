@@ -30,21 +30,27 @@
 
 .drawer {
     position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100vh;
-    background-color: #2c2c3e;
-    color: white;
-    padding-top: 4rem;
-    transition: left 0.3s ease;
-    z-index: 1001;
-}
-
-.drawer.open {
+    top: 60px;
     left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
 }
   
+.drawer.open {
+    top: 60px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 500;
+}
+ 
+ 
 .drawer__nav {
     display: flex;
     flex-direction: column;

@@ -15,45 +15,13 @@ export function TopBar() {
                 <div className="app-bar__title">ucsc.info</div>
             </header>
 
-            <aside className={`drawer ${cv?.drawer ? 'open' : ''}`}>
+            <div className={`drawer ${cv?.drawer ? 'open' : ''}`}>
                 <nav className="drawer__nav">
                     {topBarButtons.map((item) => (
-                        <TopBarButton>{item}</TopBarButton>
+                        <TopBarButton key={item}>{item}</TopBarButton>
                     ))}
                 </nav>
-            </aside>
+            </div>
         </>
     );
 }
-
-// this will need a shared state from the start
-/*
-export function TopBar() {
-    const [opened, toggleNavbar] = useState(false);
-    return (
-        <AppShell
-            header={{height: 50}}
-            navbar={{width: 300, breakpoint: 'sm', collapsed: {mobile: !opened}}}
-        >
-            <AppShell.Header>
-                <Group h="100%" px="md">
-                    <Burger opened={opened} onClick={() => {toggleNavbar(!opened)}}
-                        hiddenFrom="sm" size="sm" />
-                    <Text size="xl">ucsc.info</Text>
-                </Group>
-            </AppShell.Header>
-            <AppShell.Navbar p="mid">
-                <Text size="xl">
-                    holy fucking shit, 40000
-                </Text>
-                <Text size="xl">
-                    earthmover
-                </Text>
-                <Text size="xl">
-                    holy fucking shit, 40000
-                </Text>
-            </AppShell.Navbar>
-        </AppShell>
-    );
-}
-*/
