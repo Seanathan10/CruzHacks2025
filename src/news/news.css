@@ -1,0 +1,61 @@
+.CheckBoxesContainer {
+  display: flex;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.SideBar {
+  width: 25%;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.SideBar h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.IndividualCheckBox {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.RSS_Feed {
+  width: 75%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.RSS_Feed h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.RSS_FeedIte {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.RSS_FeedIte a {
+  text-decoration: none;
+  color: #4dd0e1;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.RSS_FeedIte a:hover {
+  text-decoration: underline;
+  color: #80deea;
+}
+
+.RSS_FeedIte .date {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.3rem 0 0.6rem;
+}
