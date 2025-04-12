@@ -15,7 +15,7 @@ function Peak() {
   const contextValues = { mobile: useMediaQuery("(max-width: 600px)") };
 
   return (
-    <>
+    <div className="Peak-Main">
       <Context.Provider value={contextValues}>
         {contextValues.mobile ? <MobileTopBar /> : <DesktopTopBar />}
       </Context.Provider>
@@ -39,7 +39,7 @@ function Peak() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </div>
   );
 }
 
