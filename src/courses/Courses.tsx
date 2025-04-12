@@ -15,7 +15,8 @@ export default function Courses() {
             try {
                 const response = await fetch('http://127.0.0.1:8000/courses?term=2248&regStatus=all');
                 const data = await response.json();
-
+                console.log("akljneliuahelifhaliwuefhlaiuwehfliuahwefliuahwelfiuh")
+                console.log(data[0])
                 const courseElements = data.map((course: any, index: number) => (
                     <Card
                         key={index}
@@ -24,7 +25,7 @@ export default function Courses() {
                         instructor={course.instructor}
                         location={course.location}
                         time={course.time}
-                        enrollment={course.enrollment}
+                        enrollment={course.enrolled}
                     />
                 ));
 

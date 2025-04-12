@@ -1,25 +1,31 @@
 .cardParent {
-    display: 'flex',
-        justifyContent: 'center',
-        marginBottom: '20px'
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px
 }
 
 .card {
-    backgroundColor: '#264775',
-        borderRadius: '8px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        padding: '20px',
-        width: '100%',
-        maxWidth: '500px',
-        transition: 'transform 0.3s',
-        cursor: 'pointer'
+    background-color: #264775;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 75%;
+    max-width: 500px;
+    transition: transform 0.3s;
+    cursor: pointer
 }
 
 .className {
-    fontSize: '18px',
-        fontWeight: 'bold',
-        // color: '#333',
-        marginBottom: '15px',
-        borderBottom: '1px solid #eee',
-        paddingBottom: '10px'
+    font-size: 18px;
+    /* font-weight: bold; */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0px;
+}
+
+.classInfo {
+    display: flex;
+    flex-direction: column;
+    /* gap: 8px; */
 }
