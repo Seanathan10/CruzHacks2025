@@ -28,10 +28,10 @@
 
 .contentRight {
     width: 70%;
-    padding: 10px;
+    padding: 15px;
     /* background-color: #0000FF; */
     overflow-y: auto;
     height: 100%;
-    /* padding-top: 80px;
-    padding-bottom: 80px; */
+    /* padding-top: 30px; */
+    /* padding-bottom: 80px; */ */
 }
