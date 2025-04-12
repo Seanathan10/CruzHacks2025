@@ -4,6 +4,7 @@ import { TopBar as MobileTopBar } from "../dashboard/mobile/TopBar";
 import { TopBar as DesktopTopBar } from "../dashboard/desktop/TopBar";
 
 import Card from "./Card";
+import DetailedView from "./DetailedView";
 import './Courses.css';
 
 export default function Courses() {
@@ -12,11 +13,14 @@ export default function Courses() {
     const isMobile = useMediaQuery("(max-width: 600px)");
     const [selectedCourseID, setSelectedCourseID] = useState<number>(0);
     const [selectedTerm, setSelectedTerm] = useState<number>(0);
+    const [detailedData, setDetailedData] = useState<any>(null);
+    const TERM = 2252;
+
 
     useEffect(() => {
         async function fetchCourses() {
             try {
-                const response = await fetch('http://127.0.0.1:8000/courses?term=2248&regStatus=all');
+                const response = await fetch(`http://127.0.0.1:8000/courses?term=${TERM}&regStatus=all`);
                 const data = await response.json();
                 setCourseData(data);
             } catch (error) {
@@ -29,30 +33,25 @@ export default function Courses() {
         fetchCourses();
     }, []);
 
-    const [detailedData, setDetailedData] = useState<any>(null);
     useEffect(() => {
         getDetailedView().then(() => { console.log(detailedData) });
-        // console.log(detailedData)
     }, [selectedCourseID]);
 
 
     const getDetailedView = async () => {
-        //try {
         const response = await fetch(`https://my.ucsc.edu/PSIGW/RESTListeningConnector/PSFT_CSPRD/SCX_CLASS_DETAIL.v1/${selectedTerm}/${selectedCourseID}`);
         const data = await response.text();
 
         setDetailedData(data);
-        //     setDetailedData(data);
-        // } catch (error) {
-        //     console.error("Failed to fetch course details:", error);
-        // }
     }
 
     return (
-        <div>
-            {isMobile ? <MobileTopBar /> : <DesktopTopBar />}
-            <div className="parent" >
-                <div className="courseList" >
+        <div className="courses-page">
+            <div className="topbar-container">
+                {isMobile ? <MobileTopBar /> : <DesktopTopBar />}
+            </div>
+            <div className="parent">
+                <div className="courseList">
                     {loading ? <p>Loading courses...</p> :
                         <div className="courses-container">
                             {courseData.map((course: any, index: number) => (
@@ -64,19 +63,16 @@ export default function Courses() {
                                     location={course.location}
                                     time={course.time}
                                     enrollment={course.enrolled}
-                                    term={"2248"} //temp
+                                    term={String(TERM)} //temp
                                     classID={course.class_number}
-                                    onCardClick={(term: string, classID: string) => { setSelectedCourseID(Number(classID)); setSelectedTerm(Number(term)) }}
+                                    onCardClick={(term: string, classID: string) => { setSelectedCourseID(Number(classID)); setSelectedTerm(Number(term)); console.log(term, classID) }}
                                 />
                             ))}
                         </div>
                     }
                 </div>
                 <div className="contentRight">
-                    {selectedCourseID}
-                    <br></br>
-                    {selectedTerm}
-                    {selectedCourseID != 0 && selectedTerm != 0 && detailedData}
+                    {detailedData && <DetailedView key={selectedCourseID} details={detailedData} />}
                 </div>
             </div>
         </div>

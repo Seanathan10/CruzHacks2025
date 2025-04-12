@@ -3,7 +3,7 @@
     justify-content: center;
     margin-bottom: 20px;
 
-    background-color: var(--card-bg);
+    /* background-color: var(--card-bg); */
     color: var(--text-color);
 }
 
