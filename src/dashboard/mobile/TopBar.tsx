@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { useContext } from "react";
 import "./TopBar.css";
+import TopBarButton from "./TopBarButton";
+import { Context } from "../../Context";
 
 export function TopBar() {
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const topBarButtons = ['ucsc.info', 'news', 'peak', 'menu', 'courses'];
+    const cv = useContext(Context);
     return (
         <>
             <header className="app-bar">
-                <button onClick={() => {setDrawerOpen(!drawerOpen)}}>
+                <button onClick={() => {cv?.drawerFunction(!(cv?.drawer))}}>
                     hamburger
                 </button>
                 <div className="app-bar__title">ucsc.info</div>
             </header>
 
-            <aside className={`drawer ${drawerOpen ? 'open' : ''}`}>
+            <aside className={`drawer ${cv?.drawer ? 'open' : ''}`}>
                 <nav className="drawer__nav">
-                    <div>holy fucking shit, 40000</div>
-                    <div>mantine sucks don't use it</div>
-                    <div>earthmover</div>
+                    {topBarButtons.map((item) => (
+                        <TopBarButton>{item}</TopBarButton>
+                    ))}
                 </nav>
             </aside>
         </>
