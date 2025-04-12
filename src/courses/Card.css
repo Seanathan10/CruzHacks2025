@@ -3,12 +3,10 @@
     justify-content: center;
     margin-bottom: 20px;
 
-    /* background-color: var(--card-bg); */
     color: var(--text-color);
 }
 
 .card {
-    /* background-color: #264775; */
     background-color: var(--card-bg);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -21,7 +19,6 @@
 
 .className {
     font-size: 18px;
-    /* font-weight: bold; */
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
@@ -31,5 +28,10 @@
 .classInfo {
     display: flex;
     flex-direction: column;
-    /* gap: 8px; */
+}
+
+.card:hover {
+	transform: translateY(-4px) scale(1.02);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+	border: 1px solid var(--link-hover);
 }

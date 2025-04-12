@@ -14,6 +14,7 @@ export default function Courses() {
     const [selectedCourseID, setSelectedCourseID] = useState<number>(0);
     const [selectedTerm, setSelectedTerm] = useState<number>(0);
     const [detailedData, setDetailedData] = useState<any>(null);
+    const [selectedClassModality, setSelectedClassModality] = useState<string>("");
     const TERM = 2252;
 
 
@@ -45,6 +46,9 @@ export default function Courses() {
         setDetailedData(data);
     }
 
+    const spacer = (<div style={{height: '0px', margin: '30px 0'}}></div>)
+
+
     return (
         <div className="courses-page">
             <div className="topbar-container">
@@ -54,6 +58,7 @@ export default function Courses() {
                 <div className="courseList">
                     {loading ? <p>Loading courses...</p> :
                         <div className="courses-container">
+                            {spacer}
                             {courseData.map((course: any, index: number) => (
                                 <Card
                                     key={index}
@@ -65,14 +70,14 @@ export default function Courses() {
                                     enrollment={course.enrolled}
                                     term={String(TERM)} //temp
                                     classID={course.class_number}
-                                    onCardClick={(term: string, classID: string) => { setSelectedCourseID(Number(classID)); setSelectedTerm(Number(term)); console.log(term, classID) }}
+                                    onCardClick={(term: string, classID: string) => { setSelectedCourseID(Number(classID)); setSelectedTerm(Number(term)); console.log(term, classID); setSelectedClassModality(course.modality)}}
                                 />
                             ))}
                         </div>
                     }
                 </div>
                 <div className="contentRight">
-                    {detailedData && <DetailedView key={selectedCourseID} details={detailedData} />}
+                    {detailedData && <DetailedView key={selectedCourseID} details={detailedData} modality={selectedClassModality}/>}
                 </div>
             </div>
         </div>

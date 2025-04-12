@@ -4,6 +4,7 @@ import { statusEmoji } from './Card.tsx';
 
 interface DetailedViewProps {
     details: string,
+    modality: string
 }
 
 function classDetailsGridEntry(title: string, content: string) {
@@ -15,27 +16,31 @@ function classDetailsGridEntry(title: string, content: string) {
     )
 }
 
-const DetailedView: React.FC<DetailedViewProps> = ({ details }) => {
+const DetailedView: React.FC<DetailedViewProps> = ({ details, modality }) => {
     const detailsObj = JSON.parse(details);
-    console.log(detailsObj)
+    const spacer = (<div style={{height: '0px', margin: '20px 0'}}></div>)
 
     return (
         <div className="parent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'left' }}>
-            <div style={{
-                height: '0px',
-                margin: '20px 0'
-            }}>
+            {spacer}
+
+            <div>
+                <h3>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
             </div>
+
+
             {detailsObj.primary_section &&
                 <div className="classDetails">
                     <h3 className="heading">Class Details</h3>
                     <div className="classDetailsGrid">
                         {classDetailsGridEntry("Status", detailsObj.primary_section.enrl_status)}
                         {classDetailsGridEntry("Capacity", detailsObj.primary_section.capacity)}
-                        {classDetailsGridEntry("Credits", detailsObj.primary_section.credits)}
                         {classDetailsGridEntry("Total", detailsObj.primary_section.enrl_total)}
-                        {classDetailsGridEntry("GenEd", detailsObj.primary_section.gened || "None")}
                         {classDetailsGridEntry("Waitlist", detailsObj.primary_section.waitlist_capacity)}
+                        {classDetailsGridEntry("Credits", detailsObj.primary_section.credits)}
+                        {classDetailsGridEntry("GenEd", detailsObj.primary_section.gened || "None")}
+                        {classDetailsGridEntry("Modality", modality)}
+                        {classDetailsGridEntry("Class ID", detailsObj.primary_section.class_nbr)}
                     </div>
                 </div>}
 
@@ -99,12 +104,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details }) => {
                     })}
                 </div>}
 
-            {/* Spacer at the bottom */}
-            <div style={{
-                height: '20px',
-                margin: '20px 0'
-            }}>
-            </div>
+            {spacer}
         </div>
     );
 }
