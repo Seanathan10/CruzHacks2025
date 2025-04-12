@@ -26,9 +26,10 @@ async def getAllCourses(
     crseUnitsOp: str = "=",
     crseUnitsFrom: str = "",
     crseUnitsTo: str = "",
-    crseUnitsExact: str = ""
+    crseUnitsExact: str = "",
+    meetingDays: str = ""
 ):
-    return scraper.queryPisa(term, department, catalogOp, catalogNum, regStatus, titleKeyword, instructorNameOp, instructorName, ge, crseUnitsOp, crseUnitsFrom, crseUnitsTo, crseUnitsExact)
+    return scraper.queryPisa(term, department, catalogOp, catalogNum, regStatus, titleKeyword, instructorNameOp, instructorName, ge, crseUnitsOp, crseUnitsFrom, crseUnitsTo, crseUnitsExact, meetingDays)
 
 @api.get("/test")
 async def getPath():
