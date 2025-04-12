@@ -76,7 +76,7 @@ def queryPisa(
     response = requests.post(URL, data=info)
     responseData: str = response.text
 
-    print(responseData)
+    # print(responseData)
 
     # parse data
     soup = BeautifulSoup(responseData, 'lxml')
