@@ -24,7 +24,7 @@ html, body {
   right: 0;
   bottom: 0;
   display: flex;
-  overflow: visible;
+  overflow: hidden;
   width: 100%;
   height: auto;
   background-color: var(--bg-color);
@@ -75,13 +75,14 @@ html, body {
   overflow-x: hidden;
   padding: 2rem;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
   background-color: var(--bg-color);
 }
 
 .RSS_Feed h1 {
+  grid-column: 1 / -1;
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -96,13 +97,15 @@ html, body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease, transform 0.3s ease, border 0.3s ease;
   opacity: 0;
-  transform: translateY(0);
-  animation: fadeInUp 0.4s ease forwards;
+  transform: translateY(0) scale(1);
   border: 1px solid transparent;
+  will-change: transform, box-shadow, border;
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: var(--delay, 0s);
 }
 
 .RSS_FeedItem:hover {
-  transform: scale(1.5);
+  transform: translateY(4px) scale(1.02);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   border: 1px solid var(--link-hover);
 }
@@ -112,7 +115,7 @@ html, body {
   font-size: 1.2rem;
   font-weight: 600;
   text-decoration: none;
-}
+} 
 
 .RSS_FeedItem a:hover {
   color: var(--link-hover);

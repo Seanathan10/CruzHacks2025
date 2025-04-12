@@ -80,7 +80,7 @@ const RssFeed = () => {
       <div className="RSS_Feed">
         <h1>UCSC News</h1>
         {items.map((item, i) => (
-          <div key={i} className="RSS_FeedItem">
+          <div key={i} className="RSS_FeedItem" style={{ "--delay": `${i * 115}ms` } as React.CSSProperties}>
             <a href={item.link} target="_blank" rel="noopener noreferrer">
               {item.title}
             </a>
