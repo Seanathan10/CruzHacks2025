@@ -23,6 +23,12 @@ body, html {
   color: var(--text-color);
   background-color: var(--bg-color);
   transition: background-color 0.3s, color 0.3s;
+
+  /* margin: 0; */
+  min-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 [data-theme="light"] {
