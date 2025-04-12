@@ -1,16 +1,11 @@
-from fastapi import FastAPI, Request, HTTPException
-import urllib.parse
-# from fastapi.middleware.cors import CORSMiddleware
+# backend/server.py
+from fastapi import FastAPI
+from backend import news
 
-api: FastAPI = FastAPI()
-# api.add_middleware(
-#     CORSMiddleware, 
-#     allow_origins=["*"], 
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app = FastAPI()
 
-@api.get("/test")
-async def getPath():
+@app.get("/test")
+async def hello():
     return {"hello": "world"}
+
+app.include_router(news.router)
