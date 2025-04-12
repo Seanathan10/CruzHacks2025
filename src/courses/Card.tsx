@@ -14,7 +14,8 @@ interface CardProps {
     classID: string,
     onCardClick: (term: string, classID: string) => void
 }
-function statusEmoji(status: string) {
+
+export function statusEmoji(status: string) {
     switch (status) {
         case "Open": return "🟢";
         case "Closed": return "🟦";

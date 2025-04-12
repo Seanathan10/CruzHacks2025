@@ -1,53 +1,39 @@
-.classDetails {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 0;
-    gap: 0px; */
-    /* padding: 0px; */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* background-color: #5e5b5b !important; */
-    /* margin: 0 20%; */
-}
-
-/* [data-theme="light"] {
-    .classDetails {
-        background-color: #cccccc !important;
-    }
-} */
-
-/* .classDetails h3 {
-    grid-column: 1 / -1;
-    margin-bottom: 15px;
-    text-align: center;
-} */
-
-/* .classDetails p {
-    margin: 0;
-    padding: 2px;
-    /* background-color: white; */
-/* border-radius: 6px; */
-/* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
-
-
-
-/* Add this to your DetailedView.css file */
 [data-theme="light"] {
     --detailed-class-info-color: #cccccc;
-    background-color: #cccccc !important;
 }
 
 [data-theme="dark"] {
     --detailed-class-info-color: #2d2c2c;
-    background-color: #2d2c2c !important;
 }
 
-.classDetails, .description, .enrollmentReq, .notes, .meetings, .sections {
+.heading {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.classDetails {
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    width: 100%;
     background-color: var(--detailed-class-info-color);
 }
 
+.classDetailsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center
+}
 
-/* Optional: You can also style the container itself */
+
 .content-container {
     width: 100%;
     text-align: left;
