@@ -3,6 +3,7 @@ from . import scraper
 import urllib.parse
 from fastapi.middleware.cors import CORSMiddleware
 from backend import news
+from . import menu
 # from fastapi.middleware.cors import CORSMiddleware
 
 api: FastAPI = FastAPI()
@@ -42,5 +43,10 @@ async def getAllCourses(
 @api.get("/test")
 async def getPath():
     return {"hello": "world"}
+
+@api.get("/menu")
+async def get_menu(location: menu.LocationRequest):
+    shortmenu = menu.get_short_menu(menu.LOCATION_MAP[location.value].value)
+    return shortmenu
 
 api.include_router(news.router)
