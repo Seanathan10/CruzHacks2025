@@ -5,13 +5,13 @@ import './App.css'
 
 import Courses from './dashboard/Courses.tsx'
 import FoodMenu from './dashboard/FoodMenu.tsx'
-import News from './dashboard/news/News.tsx'
+import News from './news/News.tsx'
 
 import {TopBar as MobileTopBar} from "./dashboard/mobile/TopBar.tsx";
 import {TopBar as DesktopTopBar} from "./dashboard/desktop/TopBar.tsx";
 
 import { useMediaQuery } from '@mantine/hooks';
-import { Context } from './dashboard/Context.tsx'
+import { Context } from './Context.tsx'
 
 function Peak() {
     const [count, setCount] = useState(0)

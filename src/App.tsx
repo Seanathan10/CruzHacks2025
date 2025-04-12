@@ -9,7 +9,7 @@ import RssFeed from './news/News.tsx';
 import Peak from './peak';
 import {Context} from './Context.tsx';
 import { useMediaQuery } from '@mantine/hooks';
-import Menu from './menu/menu.tsx';
+import Menu from './menu/Menu.tsx';
 
 
 function App() {
