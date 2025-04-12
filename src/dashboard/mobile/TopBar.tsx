@@ -1,19 +1,25 @@
+import { useState } from "react";
 import "./TopBar.css";
 
 export function TopBar() {
+    const [drawerOpen, setDrawerOpen] = useState(false);
     return (
-        <header className="app-bar">
-            <label className="hamburger-menu">
-                <input type="checkbox" />
-            </label>
-            <aside className="sidebar">
-                <nav>
+        <>
+            <header className="app-bar">
+                <button onClick={() => {setDrawerOpen(!drawerOpen)}}>
+                    hamburger
+                </button>
+                <div className="app-bar__title">ucsc.info</div>
+            </header>
+
+            <aside className={`drawer ${drawerOpen ? 'open' : ''}`}>
+                <nav className="drawer__nav">
                     <div>holy fucking shit, 40000</div>
                     <div>mantine sucks don't use it</div>
                     <div>earthmover</div>
                 </nav>
             </aside>
-        </header>
+        </>
     );
 }
 
