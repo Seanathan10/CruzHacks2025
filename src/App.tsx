@@ -16,7 +16,7 @@ function App() {
   const contextValues = {mobile: useMediaQuery('(max-width: 600px)')};
   return (
     <Context.Provider value={contextValues}>
-      <MantineProvider>
+      <MantineProvider >
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Dashboard />} />
