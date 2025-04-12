@@ -1,36 +1,59 @@
 .app-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
     background-color: #1e1e2f;
     color: white;
-    padding: 0.75rem 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: sticky;
     top: 0;
+    z-index: 1002;
 }
 
-.hamburger-menu {
-    --x-width: calc(var(--hamburger-height) * 1.41421356237);
+.menu-button {
+    font-size: 1.5rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.app-bar__title {
+    margin-left: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    background-color: #2c2c3e;
+    color: white;
+    padding-top: 4rem;
+    transition: left 0.3s ease;
+    z-index: 1001;
+}
+
+.drawer.open {
+    left: 0;
+}
   
+.drawer__nav {
     display: flex;
     flex-direction: column;
-    gap: var(--hamburger-gap);
-    width: max-content;
-    position: absolute;
-    top: var(--hamburger-margin);
-    left: var(--hamburger-margin);
-    z-index: 2;
-    cursor: pointer;
+    gap: 1rem;
+    padding: 1rem;
 }
-
-.sidebar {
-    transition: translate var(--animation-timing);
-    translate: -100%;
-    padding: 0.5rem 1rem;
-    padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
-    background-color: var(--foreground);
-    color: var(--background);
-    max-width: 10rem;
-    min-height: 100vh;
+  
+.drawer__nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
 }
