@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, HTTPException
 from enum import Enum
 import requests
 from bs4 import BeautifulSoup, Tag
+from datetime import datetime, timedelta
 
 api: FastAPI = FastAPI()
 
@@ -35,8 +36,18 @@ class LocationRequest(Enum):
     PorterKresge = 'Porter/Kresge'
     RachelCarsonOakes = 'Carson/Oakes'
 
-def fetch_website_html(url: str, locationNum: str, meal: str = '') -> str:
-    full_url = url + locationNum + (MEAL_URL + meal if meal else '')
+def fetch_website_html(url: str, locationNum: str, meal: str = '', day_offset = 0) -> str:
+    full_url = url + locationNum + ((MEAL_URL + meal) if meal != '' else '')
+    if day_offset != 0:
+        date = datetime.now() + timedelta(days=day_offset)
+        date_str = date.strftime('%m/%d/%Y')
+
+        date_str = date_str.replace('/', '%2F')
+        full_url += f'&dtdate={date_str}'
+        
+        # url += f'&dtdate={date_str}'
+
+    print(full_url)
     cookies = {
         'WebInaCartLocation': locationNum,
         'WebInaCartDates': '',
@@ -48,9 +59,9 @@ def fetch_website_html(url: str, locationNum: str, meal: str = '') -> str:
     response = requests.get(full_url, cookies=cookies)
     return response.text
 
-def get_short_menu(locationNum: str) -> str:
+def get_short_menu(locationNum: str, day_offset: int = 0) -> str:
     url = BASE_URL + SHORTMENU_URL
-    html = fetch_website_html(url, locationNum)
+    html = fetch_website_html(url, locationNum, '', day_offset)
     soup = BeautifulSoup(html, 'lxml')
 
     menu = {}
@@ -75,14 +86,25 @@ def get_short_menu(locationNum: str) -> str:
                 current_group = divider.text.replace('--', '').strip()
                 food_items[current_group] = {}
                 continue
+
             food_name = food.find('div', class_='shortmenurecipes')
             food_name = food_name.text.strip()
+
             restrictions = []
             for restriction in food.select('img'):
                 restriction_name = restriction['src'].split('/')[-1].split('.')[0]
                 restrictions.append(EMOJIS[restriction_name] if restriction_name in EMOJIS else restriction_name)
+
             food_items[current_group][food_name] = {
                 'restrictions': restrictions,
             }
+
         menu[meal_name] = food_items
     return menu
+
+if __name__ == '__main__':
+    location = Location.CowellStevenson
+    print(get_short_menu(location.value, 0))
+    print()
+    print()
+    print(get_short_menu(location.value, 1))

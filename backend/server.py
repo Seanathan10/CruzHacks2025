@@ -45,8 +45,8 @@ async def getPath():
     return {"hello": "world"}
 
 @api.get("/menu")
-async def get_menu(location: menu.LocationRequest):
-    shortmenu = menu.get_short_menu(menu.LOCATION_MAP[location.value].value)
+async def get_menu(location: menu.LocationRequest, day_offset: int = 0):
+    shortmenu = menu.get_short_menu(menu.LOCATION_MAP[location.value].value, day_offset)
     return shortmenu
 
 api.include_router(news.router)
