@@ -7,9 +7,13 @@ interface CardProps {
     instructor: string,
     location: string,
     time: string,
-    enrollment: string
+    enrollment: string,
+    
+    // used in callback
+    term: string,
+    classID: string,
+    onCardClick: (term: string, classID: string) => void
 }
-
 function statusEmoji(status: string) {
     switch (status) {
         case "Open": return "🟢";
@@ -18,11 +22,10 @@ function statusEmoji(status: string) {
     }
 }
 
-const Card: React.FC<CardProps> = ({ classStatus, className, instructor, location, time, enrollment }) => {
+const Card: React.FC<CardProps> = ({ classStatus, className, instructor, location, time, enrollment, term, classID, onCardClick }) => {
     return (
-        <div className="cardParent">
+        <div className="cardParent" onClick={() => {onCardClick(term, classID)}}>
             <div className="card">
-                {/* <h3 className="className">{classStatus} {className}</h3> */}
                 <div className="classInfo">
                     <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>{statusEmoji(classStatus)} {className}</span></p>
                     <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Instructor:</span> {instructor}</p>
