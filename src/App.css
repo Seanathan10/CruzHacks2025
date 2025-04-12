@@ -1,8 +1,27 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #f3f3f3;
+  --link-color: #1a0dab;
+  --shadow-hover: drop-shadow(0 0 2em #646cffaa);
+}
+
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #ffffff;
+  --card-bg: #2a2a2a;
+  --link-color: #7baaf7;
+  --shadow-hover: drop-shadow(0 0 2em #646cffaa);
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 .Peak-Logo {
@@ -12,7 +31,7 @@
   transition: filter 300ms;
 }
 .Peak-Logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: var(--shadow-hover);
 }
 .Peak-Logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -35,8 +54,14 @@
 
 .Peak-Card {
   padding: 2em;
+  background-color: var(--card-bg);
+  border-radius: 10px;
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
 }

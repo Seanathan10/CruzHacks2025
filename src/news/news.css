@@ -5,6 +5,8 @@
 }
 
 .SideBar {
+  background-color: var(--card-bg);
+  color: var(--text-color);
   width: 25%;
   padding: 1rem;
   border-right: 1px solid #ccc;
@@ -37,6 +39,7 @@
 }
 
 .RSS_FeedIte {
+  color: var(--link-color);
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #ddd;
@@ -50,6 +53,7 @@
 }
 
 .RSS_FeedIte a:hover {
+  color: var(--link-hover);
   text-decoration: underline;
   color: #80deea;
 }

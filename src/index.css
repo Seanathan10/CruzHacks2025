@@ -1,17 +1,43 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* index.css */
+body, html {
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
+
+
+:root {
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --text-color: #ffffff;
+  --bg-color: #242424;
+
+  --primary-color: #646cff;
+  --primary-hover: #535bf2;
+
+  --button-bg: #1a1a1a;
+  --card-bg: #264775;
+  --link-color: #4dd0e1;
+  --link-hover: #80deea;
+
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+[data-theme="light"] {
+  --text-color: #213547;
+  --bg-color: #ffffff;
+
+  --primary-color: #646cff;
+  --primary-hover: #747bff;
+
+  --button-bg: #f9f9f9;
+  --card-bg: #f1f1f1;
+  --link-color: #0077cc;
+  --link-hover: #005999;
+}
+
 
 a {
   font-weight: 500;
@@ -42,7 +68,9 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
+  background-color: light-dark(#f9f9f9, #1a1a1a);
+  /* background-color: var(--button-bg); */
   cursor: pointer;
   transition: border-color 0.25s;
 }
