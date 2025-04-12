@@ -56,6 +56,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details }) => {
                 <div className="sections">
                     <h3>Sections</h3>
                     {detailsObj.secondary_sections.map((section: any, _: number) => {
+                        if (!section.meetings) return;
 
                         return (
                             <div>
@@ -72,6 +73,17 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details }) => {
                         );
                     })}
                 </div>}
+
+                {/* because adding padding in any way royally fucks up the text and causes it to either not be scrollable or cut off */}
+                {/* stupid workaround that inexplicably works*/}
+                <div style={{
+                    width: '300px',
+                    height: '20px',
+                    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                    // border: '1px solid rgba(0, 0, 0, 0.2)',
+                    margin: '20px auto'
+                }}>
+                </div>
         </div>
     );
 }
