@@ -1,10 +1,18 @@
+import { useState } from 'react'
+import './App.css'
+import '@mantine/core/styles.css';
+import Dashboard from './dashboard/Dashboard';
+import { MantineProvider } from '@mantine/core';
+
+let mobile = false;
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import './App.css';
 import RssFeed from './news/news';
 import Peak from './peak';
 
+
 function App() {
   return (
+  <MantineProvider>
     <BrowserRouter>
       <div>
         <header style={{
@@ -35,6 +43,7 @@ function App() {
         </main>
       </div>
     </BrowserRouter>
+  </MantineProvider>
   );
 }
 
