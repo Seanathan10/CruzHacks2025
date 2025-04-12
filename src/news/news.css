@@ -95,11 +95,16 @@ html, body {
   padding: 1.25rem 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.3s ease, transform 0.3s ease, border 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border 0.3s ease, opacity 0.3s ease;
   opacity: 0;
-  transform: translateY(0) scale(1);
+  transform: translateY(10px) scale(1.5);
   border: 1px solid transparent;
   will-change: transform, box-shadow, border;
+  animation: fadeInUp 0.5s ease forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+.RSS_FeedItem.Animate {
   animation: fadeInUp 0.5s ease forwards;
   animation-delay: var(--delay, 0s);
 }

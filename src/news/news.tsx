@@ -51,6 +51,9 @@ const RssFeed = () => {
     "press_releases",
   ]);
   const [items, setItems] = useState<FeedItem[]>([]);
+  const [prevLinks, setPrevLinks] = useState<Set<string>>(new Set());
+  const [newlyAnimatedLinks, setNewlyAnimatedLinks] = useState<Set<string>>(new Set());
+
   const mediaQueryMobile = useMediaQuery("(max-width: 600px)");
 
   const toggleFeed = (key: string) => {
@@ -61,27 +64,42 @@ const RssFeed = () => {
 
   useEffect(() => {
     const fetchFeeds = async () => {
+      if (selectedFeeds.length === 0) {
+        setItems([]);
+        setPrevLinks(new Set());
+        setNewlyAnimatedLinks(new Set());
+        return;
+      }
+  
       try {
         const results = await Promise.all(
           FEEDS.filter((f) => selectedFeeds.includes(f.key)).map((feed) =>
             fetch(`http://localhost:8000${feed.url}`).then((res) => res.json())
           )
         );
-
+  
         const allItems: FeedItem[] = results.flatMap((r) => r.feed || []);
-        allItems.sort(
-          (a, b) =>
-            new Date(b.published).getTime() - new Date(a.published).getTime()
-        );
-
+        allItems.sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime());
+  
+        const newLinks = new Set<string>();
+        for (const item of allItems) {
+          if (!prevLinks.has(item.link)) {
+            newLinks.add(item.link);
+          }
+        }
+  
         setItems(allItems);
+        setPrevLinks(new Set(allItems.map((item) => item.link)));
+        setNewlyAnimatedLinks(newLinks);
       } catch (error) {
         console.error("Failed to fetch feeds:", error);
       }
     };
-
+  
     fetchFeeds();
-  }, [selectedFeeds]);
+  }, [selectedFeeds, prevLinks]);
+  
+  
 
   return (
     <>
@@ -106,22 +124,18 @@ const RssFeed = () => {
 
         <div className="RSS_Feed">
           <h1>UCSC News</h1>
-          {items.map((item, i) => (
-            <div
-              key={item.link} // or use something unique if `link` isn't guaranteed
-              className="RSS_FeedItem"
-              style={
-                {
-                  "--delay": `${i * 100}ms`,
-                  animationName: "none", // reset animation
-                  animation: `fadeInUp 0.5s ease forwards`,
-                } as React.CSSProperties
-              }
-            >
-              <a href={item.link} target="_blank" rel="noopener noreferrer">
-                {item.title}
-              </a>
-              <p className="date">
+          {items.map((item, i) => {
+  const isNew = newlyAnimatedLinks.has(item.link);
+  return (
+    <div
+      key={item.link}
+      className={`RSS_FeedItem${isNew ? ' animate' : ''}`}
+      style={isNew ? { "--delay": `${i * 100}ms` } as React.CSSProperties : undefined}
+    >
+      <a href={item.link} target="_blank" rel="noopener noreferrer">
+        {item.title}
+      </a>
+      <p className="date">
                 {new Date(item.published).toLocaleString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -130,9 +144,12 @@ const RssFeed = () => {
                   hour12: true,
                 })}
               </p>
-              <div dangerouslySetInnerHTML={{ __html: item.summary }} />
-            </div>
-          ))}
+      <div dangerouslySetInnerHTML={{ __html: item.summary }} />
+    </div>
+  );
+})}
+
+
         </div>
       </div>
     </>
