@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,11 +16,21 @@
   
   .nav-bar__nav {
     display: flex;
-    gap: 1rem;
+    gap: 0rem;
+  }
+
+  .nav-bar__nav a {
+    padding: 20px;
+    height: auto;
+    &:hover {
+      background-color: var(--bg-color);
+      transition: 0.25s ease-in-out;
+    }
   }
   
   .nav-bar__theme-toggle {
     display: flex;
     align-items: center;
+    /* width: 250px; */
   }
   
