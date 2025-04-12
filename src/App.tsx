@@ -2,7 +2,7 @@ import './App.css'
 import Dashboard from './dashboard/Dashboard';
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import RssFeed from './news/news.tsx';
+import RssFeed from './news/News.tsx';
 import Peak from './peak';
 import Menu from './menu/Menu.tsx';
 import {Context} from './Context.tsx';

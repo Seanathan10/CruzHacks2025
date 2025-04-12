@@ -1,12 +1,23 @@
-/* index.css */
-body, html {
+/* body, html, root {
   color: var(--text-color);
   background-color: var(--bg-color);
-}
+} */
 
+/* body {
+  margin: 0;
+  padding-top: 50px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  border: 5px solid yellow;
+
+  display: flex;
+  flex-direction: column;
+}
 
 :root {
   --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  border: 5px solid red;
 
   --text-color: #ffffff;
   --bg-color: #242424;
@@ -25,7 +36,8 @@ body, html {
   transition: background-color 0.3s, color 0.3s;
 
   /* margin: 0; */
-  min-width: 100vw;
+  /* min-width: 100vw; */
+  /* min-height: 100vh; */ /*
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,6 +54,60 @@ body, html {
   --card-bg: #f1f1f1;
   --link-color: #0077cc;
   --link-hover: #005999;
+} */
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  min-height: calc(100vh - 50px);
+}
+
+:root {
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --text-color: #ffffff;
+  --bg-color: #242424;
+
+  --primary-color: #646cff;
+  --primary-hover: #535bf2;
+
+  --button-bg: #1a1a1a;
+  --card-bg: #264775;
+
+  --link-color: #4dd0e1;
+  --link-hover: #80deea;
+
+  --shadow-hover: drop-shadow(0 0 2em #646cffaa);
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] {
+  --text-color: #213547;
+  --bg-color: #ffffff;
+  --primary-color: #646cff;
+  --primary-hover: #747bff;
+  --button-bg: #f9f9f9;
+  --card-bg: #f1f1f1;
+  --link-color: #0077cc;
+  --link-hover: #005999;
+}
+
+[data-theme="light"],
+[data-theme="dark"] {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 

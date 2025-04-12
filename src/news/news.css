@@ -1,65 +1,100 @@
-.CheckBoxesContainer {
-  display: flex;
+html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
-  font-family: sans-serif;
+  width: 100%;
+  overflow: hidden;
+}
+
+.TopBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index: 1000;
+}
+
+.RssFeedMain {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+
+  /* border: 5px solid red; */
 }
 
 .SideBar {
+  display: flex;
+  /* border: 5px solid aqua; */
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
   background-color: var(--card-bg);
-  color: var(--text-color);
-  width: 25%;
-  padding: 1rem;
-  border-right: 1px solid #ccc;
-  box-sizing: border-box;
 }
 
-.SideBar h2 {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+.SideBar {
+  padding: 15px;
 }
 
-.IndividualCheckBox {
-  margin-bottom: 0.5rem;
+.SideBar label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
-.RSS_Feed {
-  width: 75%;
+
+.CheckBoxesContainer {
+  width: 280px;
+  min-width: 240px;
+  max-width: 320px;
   padding: 1rem;
   box-sizing: border-box;
+  background-color: var(--card-bg);
+  border-right: 1px solid #444;
+  overflow: hidden;
+
 }
 
-.RSS_Feed h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+
+.RSS_Feed {
+  /* border: 5px solid yellow; */
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  word-break: break-word;
 }
 
-.RSS_FeedIte {
-  color: var(--link-color);
+.RSS_FeedItem {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
 }
 
-.RSS_FeedIte a {
-  text-decoration: none;
-  color: #4dd0e1;
+.RSS_FeedItem a {
+  color: var(--link-color);
   font-size: 1.2rem;
   font-weight: 600;
+  text-decoration: none;
 }
-
-.RSS_FeedIte a:hover {
+.RSS_FeedItem a:hover {
   color: var(--link-hover);
   text-decoration: underline;
-  color: #80deea;
 }
-
-.RSS_FeedIte .date {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0.3rem 0 0.6rem;
+.date {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.3rem;
+  margin-bottom: 0.6rem;
 }
