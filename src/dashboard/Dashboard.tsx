@@ -1,22 +1,17 @@
-import {MantineProvider} from "@mantine/core";
 import Courses from "./Courses";
 import FoodMenu from "./FoodMenu";
-import News from "./news/News";
 import {TopBar as MobileTopBar} from "./mobile/TopBar";
 import {TopBar as DesktopTopBar} from "./desktop/TopBar";
-import { useMediaQuery } from '@mantine/hooks';
-import {Context} from './Context.tsx';
+import {useContext} from "react";
+import { Context } from "../Context";
 
 export default function Dashboard() {
-  const contextValues = {mobile: useMediaQuery('(max-width: 600px)')};
+    const contextValues = useContext(Context);
     return (
         <>
-            <Context.Provider value={contextValues}>
-                {contextValues.mobile ? (<MobileTopBar />) : (<DesktopTopBar />)}
-                <News/>
+            {contextValues?.mobile ? (<MobileTopBar />) : (<DesktopTopBar />)}
                 <Courses/>
                 <FoodMenu/>
-            </Context.Provider>
         </>
     )
 }

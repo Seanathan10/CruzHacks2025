@@ -1,4 +1,5 @@
-import { AppShell, Group, Text } from "@mantine/core";
+import { AppShell, Container, Group, Text } from "@mantine/core";
+import TopBarButton from "./TopBarButton";
 
 export function TopBar() {
     return (
@@ -7,18 +8,10 @@ export function TopBar() {
             <AppShell.Header>
                 <Group h="100%" px="md">
                     {/* this code below is gonna be changed to a button*/}
-                    <Text size="xl">
-                        ucsc.info
-                    </Text>
-                    <Text size="xl">
-                        news
-                    </Text>
-                    <Text size="xl">
-                        menu
-                    </Text>
-                    <Text size="xl">
-                        courses
-                    </Text>
+                    <TopBarButton>ucsc.info</TopBarButton>
+                    <TopBarButton>news</TopBarButton>
+                    <TopBarButton>peak</TopBarButton>
+                    <TopBarButton>menu</TopBarButton>
                 </Group>
             </AppShell.Header>
         </AppShell>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-
+import { useMediaQuery } from "@mantine/hooks";
+import { TopBar as MobileTopBar } from "../dashboard/mobile/TopBar";
+import { TopBar as DesktopTopBar } from "../dashboard/desktop/TopBar";
 import "./news.css";
 
 type FeedItem = {
@@ -23,6 +25,7 @@ const FEEDS = [
 const RssFeed = () => {
   const [selectedFeeds, setSelectedFeeds] = useState<string[]>(["press_releases"]);
   const [items, setItems] = useState<FeedItem[]>([]);
+  const mediaQueryMobile = useMediaQuery('(max-width: 600px)');
 
   const toggleFeed = (key: string) => {
     setSelectedFeeds((prev) =>
@@ -52,34 +55,38 @@ const RssFeed = () => {
   }, [selectedFeeds]);
 
   return (
-    <div className="CheckBoxesContainer">
-      <div className="SideBar">
-        <h2>Categories</h2>
-        {FEEDS.map((feed) => (
-          <div key={feed.key} className="IndividualCheckBox">
-            <label>
-              <input
-                type="checkbox"
-                checked={selectedFeeds.includes(feed.key)}
-                onChange={() => toggleFeed(feed.key)}
-              />
-              {feed.name}
-            </label>
-          </div>
-        ))}
-      </div>
+    <div>
+      {mediaQueryMobile ? <MobileTopBar /> : <DesktopTopBar />}
 
-      <div className="RSS_Feed">
-        <h1>UCSC News</h1>
-        {items.map((item, i) => (
-          <div key={i} className="RSS_FeedItem">
-            <a href={item.link} target="_blank" rel="noopener noreferrer">
-              {item.title}
-            </a>
-            <p className="date">{item.published}</p>
-            <div dangerouslySetInnerHTML={{ __html: item.summary }} />
-          </div>
-        ))}
+      <div className="CheckBoxesContainer">
+        <div className="SideBar">
+          <h2>Categories</h2>
+          {FEEDS.map((feed) => (
+            <div key={feed.key} className="IndividualCheckBox">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedFeeds.includes(feed.key)}
+                  onChange={() => toggleFeed(feed.key)}
+                />
+                {feed.name}
+              </label>
+            </div>
+          ))}
+        </div>
+
+        <div className="RSS_Feed">
+          <h1>UCSC News</h1>
+          {items.map((item, i) => (
+            <div key={i} className="RSS_FeedItem">
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                {item.title}
+              </a>
+              <p className="date">{item.published}</p>
+              <div dangerouslySetInnerHTML={{ __html: item.summary }} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
