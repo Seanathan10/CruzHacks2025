@@ -15,10 +15,10 @@ api: FastAPI = FastAPI()
 @api.get("/courses")
 async def getAllCourses(
     term: str, 
+    regStatus: str = "O",
     department: str = "", 
     catalogOp: str = "contains", 
     catalogNum: str = "", 
-    regStatus: str = "O",
     titleKeyword: str = "",
     instructorNameOp: str = "=",
     instructorName: str = "",
@@ -27,9 +27,15 @@ async def getAllCourses(
     crseUnitsFrom: str = "",
     crseUnitsTo: str = "",
     crseUnitsExact: str = "",
-    meetingDays: str = ""
+    meetingDays: str = "",
+    meetingTimes: str = "",
+    acadCareer: str = "",
+    asynch: str = "A",
+    hybrid: str = "H",
+    synch: str = "S",
+    person: str = "P"
 ):
-    return scraper.queryPisa(term, department, catalogOp, catalogNum, regStatus, titleKeyword, instructorNameOp, instructorName, ge, crseUnitsOp, crseUnitsFrom, crseUnitsTo, crseUnitsExact, meetingDays)
+    return scraper.queryPisa(term, regStatus, department, catalogOp, catalogNum, titleKeyword, instructorNameOp, instructorName, ge, crseUnitsOp, crseUnitsFrom, crseUnitsTo, crseUnitsExact, meetingDays, meetingTimes, acadCareer, asynch, hybrid, synch, person)
 
 @api.get("/test")
 async def getPath():
