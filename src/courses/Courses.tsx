@@ -4,6 +4,7 @@ import { TopBar as MobileTopBar } from "../dashboard/mobile/TopBar";
 import { TopBar as DesktopTopBar } from "../dashboard/desktop/TopBar";
 
 import Card from "./Card";
+import './Courses.css';
 
 export default function Courses() {
     const [courseData, setCourseData] = useState<any[]>([]);
@@ -28,12 +29,30 @@ export default function Courses() {
         fetchCourses();
     }, []);
 
+    const [detailedData, setDetailedData] = useState<any>(null);
+    useEffect(() => {
+        getDetailedView().then(() => { console.log(detailedData) });
+        // console.log(detailedData)
+    }, [selectedCourseID]);
+
+
+    const getDetailedView = async () => {
+        //try {
+        const response = await fetch(`https://my.ucsc.edu/PSIGW/RESTListeningConnector/PSFT_CSPRD/SCX_CLASS_DETAIL.v1/${selectedTerm}/${selectedCourseID}`);
+        const data = await response.text();
+
+        setDetailedData(data);
+        //     setDetailedData(data);
+        // } catch (error) {
+        //     console.error("Failed to fetch course details:", error);
+        // }
+    }
+
     return (
         <div>
             {isMobile ? <MobileTopBar /> : <DesktopTopBar />}
-
-            <div className="parent" style={{ display: 'flex', width: '100%', height: '100%' }}>
-                <div className="courseList" style={{ width: '30%', overflowY: 'auto', padding: '10px' }}>
+            <div className="parent" >
+                <div className="courseList" >
                     {loading ? <p>Loading courses...</p> :
                         <div className="courses-container">
                             {courseData.map((course: any, index: number) => (
@@ -53,10 +72,11 @@ export default function Courses() {
                         </div>
                     }
                 </div>
-                <div className="contentRight" style={{ width: '70%', padding: '10px', backgroundColor: "#0000FF" }}>
+                <div className="contentRight">
                     {selectedCourseID}
                     <br></br>
                     {selectedTerm}
+                    {selectedCourseID != 0 && selectedTerm != 0 && detailedData}
                 </div>
             </div>
         </div>
