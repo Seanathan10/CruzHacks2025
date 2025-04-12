@@ -11,6 +11,7 @@ export function TopBar() {
                     <TopBarButton>ucsc.info</TopBarButton>
                     <TopBarButton>news</TopBarButton>
                     <TopBarButton>peak</TopBarButton>
+                    <TopBarButton>menu</TopBarButton>
                 </Group>
             </AppShell.Header>
         </AppShell>

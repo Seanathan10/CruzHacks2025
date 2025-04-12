@@ -4,23 +4,29 @@ import '@mantine/core/styles.css';
 import Dashboard from './dashboard/Dashboard';
 import { MantineProvider } from '@mantine/core';
 
-let mobile = false;
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import RssFeed from './news/news';
+import RssFeed from './news/News.tsx';
 import Peak from './peak';
+import {Context} from './Context.tsx';
+import { useMediaQuery } from '@mantine/hooks';
+import Menu from './menu/menu.tsx';
 
 
 function App() {
+  const contextValues = {mobile: useMediaQuery('(max-width: 600px)')};
   return (
-  <MantineProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/news' element={<RssFeed />} />
-        <Route path='/peak' element={<Peak />} />
-      </Routes>
-    </BrowserRouter>
-  </MantineProvider>
+    <Context.Provider value={contextValues}>
+      <MantineProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Dashboard />} />
+            <Route path='/news' element={<RssFeed />} />
+            <Route path='/menu' element={<Menu />} />
+            <Route path='/peak' element={<Peak />} />
+          </Routes>
+        </BrowserRouter>
+      </MantineProvider>
+    </Context.Provider>
   );
 }
 
