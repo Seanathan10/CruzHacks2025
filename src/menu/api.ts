@@ -8,11 +8,11 @@ export enum Location {
     RachelCarsonOakes = 'Carson/Oakes',
 }
 
-interface FoodGroup {
+export interface FoodGroup {
     [key: string]: FoodItem
 }
 
-interface FoodItem {
+export interface FoodItem {
     name: string
     restrictions: string[]
     portion?: string
