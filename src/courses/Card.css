@@ -14,7 +14,8 @@
     width: 75%;
     max-width: 500px;
     transition: transform 0.3s;
-    cursor: pointer
+    cursor: pointer;
+    line-height: 23px;
 }
 
 .className {
@@ -34,4 +35,5 @@
 	transform: translateY(-4px) scale(1.02);
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 	border: 1px solid var(--link-hover);
+    z-index: 5;
 }

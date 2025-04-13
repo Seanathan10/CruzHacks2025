@@ -1,19 +1,20 @@
+import './Search.css';
+import { use, useState } from 'react';
+
 interface SearchProps {
+	onSearchBoxInput: (query: string) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ }) => {
+const Search: React.FC<SearchProps> = ({ onSearchBoxInput }) => {
+	const [searchText, setSearchText] = useState<string>("");
+
 	return (
-		<div className="search-container" style={{
-			position: 'relative',
-			width: '100%',
-			maxWidth: '100%',
-			padding: '0 10px',  // Add padding to prevent touching edges
-		}}>
+		<div className="searchContainer">
 			<svg
 				style={{
 					position: 'absolute',
 					top: '50%',
-					left: '22px', // Adjusted to account for container padding
+					left: '22px',
 					transform: 'translateY(-50%)',
 					color: '#9aa0a6',
 				}}
@@ -32,16 +33,15 @@ const Search: React.FC<SearchProps> = ({ }) => {
 				className="searchBox"
 				type="text"
 				placeholder="Search..."
-				style={{
-					width: '100%',
-					padding: '12px 20px 12px 40px',
-					fontSize: '16px',
-					border: '1px solid #dfe1e5',
-					borderRadius: '8px',
-					boxShadow: '0 1px 6px rgba(32, 33, 36, 0.18)',
-					outline: 'none',
-					transition: 'all 0.3s',
-					boxSizing: 'border-box', // This fixes the width calculation
+				value={searchText}
+				onChange={(e) => {
+					setSearchText(e.target.value);
+				}}
+				onKeyDown={(e) => {
+					if (e.key === 'Enter') {
+						// console.log("Search submitted:", searchText);
+						onSearchBoxInput(searchText)
+					}
 				}}
 			/>
 		</div>
