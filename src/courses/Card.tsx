@@ -11,6 +11,10 @@ import MapIconDarkMode from '/icons/map-dark-mode.svg';
 
 import ClockIconLightMode from '/icons/clock-light-mode.svg'
 import ClockIconDarkMode from '/icons/clock-dark-mode.svg'
+
+import SunIconLightMode from '/icons/sun-light-mode.svg';
+import SunIconDarkMode from '/icons/sun-dark-mode.svg';
+
 interface CardProps {
     classStatus: string,
     className: string,
@@ -18,6 +22,7 @@ interface CardProps {
     location: string,
     time: string,
     enrollment: string,
+    summerSession: string | null,
 
     // used in callback
     term: string,
@@ -47,9 +52,7 @@ function Icon({ svg, data }: { svg: any, data: string }) {
     )
 }
 
-const Card: React.FC<CardProps> = ({ classStatus, className, instructor, location, time, enrollment, term, classID, onCardClick }) => {
-    console.log(document.documentElement.getAttribute('data-theme'))
-
+const Card: React.FC<CardProps> = ({ classStatus, className, instructor, location, time, enrollment, summerSession, term, classID, onCardClick }) => {
     return (
         <div className="cardParent" onClick={() => { onCardClick(term, classID) }}>
             <div className="card">
@@ -63,6 +66,7 @@ const Card: React.FC<CardProps> = ({ classStatus, className, instructor, locatio
                             <Icon svg={MapIconDarkMode} data={location} />
                             <Icon svg={ClockIconDarkMode} data={time} />
                             <Icon svg={MultiplePeopleIconDarkMode} data={enrollment} />
+                            {summerSession && <Icon svg={SunIconDarkMode} data={summerSession} />}
                         </>
                     ) : (
                         <>
@@ -70,6 +74,7 @@ const Card: React.FC<CardProps> = ({ classStatus, className, instructor, locatio
                             <Icon svg={MapIconLightMode} data={location} />
                             <Icon svg={ClockIconLightMode} data={time} />
                             <Icon svg={MultiplePeopleIconLightMode} data={enrollment} />
+                            {summerSession && <Icon svg={SunIconLightMode} data={summerSession} />}
                         </>
                     )}
                 </div>
