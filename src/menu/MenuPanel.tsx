@@ -14,18 +14,17 @@ export function MenuPanel(props: MenuPanelProps) {
         ([_, meal]) => Object.keys(meal).length > 0 // Only include non-empty meals
       );
     return (
-        <div style={{width: props.width ?? '100%', marginLeft: 0,
+        <div className="menuPanel" style={{width: props.width ?? '100%', marginLeft: 0,
             padding: 0, borderRadius: 10, boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-            display: 'flex', flexDirection: 'column',
+            display: 'flex', flexDirection: 'column', overflowY: 'scroll',
             minWidth: '400px'}}>
         <div style={{fontSize: 30, fontWeight: 'bold', margin: 0, padding: 20}}>{props.name}</div>
-        {locationMenus.length > 0 ? locationMenus.map(([mealName, meal]) => (
-            (meal && Object.keys(meal).length > 0) ? <div key={mealName}>
-                <div>
-                    <MealHeader key={mealName}>{mealName}</MealHeader>
-                </div>
-                <div>
-                    {Object.entries(meal).map(([groupName, foodGroup]) => (
+        {locationMenus.map(([mealName, meal]) =>
+            Object.keys(meal).length > 0 ? (
+                <div key={mealName}>
+                    <MealHeader>{mealName}</MealHeader>
+                        {Object.entries(meal).map(([groupName, foodGroup]) =>
+                        Object.keys(foodGroup).length > 0 ? (
                         <div key={groupName}>
                             <p className="groupName" style={{display: 'flex',
                                 fontSize: 15, marginBottom: 5, fontWeight: 'bold',
@@ -37,10 +36,11 @@ export function MenuPanel(props: MenuPanelProps) {
                                 ))}
                             </div>
                         </div>
-                    ))}
+                    ) : null
+                    )}
                 </div>
-            </div> : null
-        )) : null}
+            ) : null
+            )}
         </div>
     )
 }
