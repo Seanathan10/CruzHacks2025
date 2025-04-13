@@ -1,6 +1,16 @@
 import React from "react"
 import './Card.css'
+import SinglePersonIconLightMode from '/icons/single-person-light-mode.svg';
+import SinglePersonIconDarkMode from '/icons/single-person-dark-mode.svg';
 
+import MultiplePeopleIconLightMode from '/icons/multiple-people-light-mode.svg';
+import MultiplePeopleIconDarkMode from '/icons/multiple-people-dark-mode.svg';
+
+import MapIconLightMode from '/icons/map-light-mode.svg';
+import MapIconDarkMode from '/icons/map-dark-mode.svg';
+
+import ClockIconLightMode from '/icons/clock-light-mode.svg'
+import ClockIconDarkMode from '/icons/clock-dark-mode.svg'
 interface CardProps {
     classStatus: string,
     className: string,
@@ -8,7 +18,7 @@ interface CardProps {
     location: string,
     time: string,
     enrollment: string,
-    
+
     // used in callback
     term: string,
     classID: string,
@@ -23,18 +33,45 @@ export function statusEmoji(status: string) {
     }
 }
 
-const Card: React.FC<CardProps> = ({ classStatus, className, instructor, location, time, enrollment, term, classID, onCardClick }) => {
+function Icon({ svg, data }: { svg: any, data: string }) {
     return (
-        <div className="cardParent" onClick={() => {onCardClick(term, classID)}}>
+        <div style={{alignContent: "left", display: "flex"}}>
+            <p style={{ margin: '-2px 0' }}>
+                <img
+                    src={svg}
+                    style={{ verticalAlign: 'bottom' }}>
+                </img>
+                {' ' + data}
+            </p>
+        </div>
+    )
+}
+
+const Card: React.FC<CardProps> = ({ classStatus, className, instructor, location, time, enrollment, term, classID, onCardClick }) => {
+    console.log(document.documentElement.getAttribute('data-theme'))
+
+    return (
+        <div className="cardParent" onClick={() => { onCardClick(term, classID) }}>
             <div className="card">
                 <div className="classInfo">
-                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>{statusEmoji(classStatus)} {className}</span></p>
-                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Instructor:</span> {instructor}</p>
-                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Location:</span> {location}</p>
-                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Time:</span> {time}</p>
-                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Enrollment:</span> {enrollment}</p>
-                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Term:</span> {term}</p>
-                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>ID:</span> {classID}</p>
+                    <div style={{alignContent: "left", display: "flex"}}>
+                        <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>{statusEmoji(classStatus)} {className}</span></p>
+                    </div>
+                    {document.documentElement.getAttribute('data-theme') === 'dark' ? (
+                        <>
+                            <Icon svg={SinglePersonIconDarkMode} data={instructor} />
+                            <Icon svg={MapIconDarkMode} data={location} />
+                            <Icon svg={ClockIconDarkMode} data={time} />
+                            <Icon svg={MultiplePeopleIconDarkMode} data={enrollment} />
+                        </>
+                    ) : (
+                        <>
+                            <Icon svg={SinglePersonIconLightMode} data={instructor} />
+                            <Icon svg={MapIconLightMode} data={location} />
+                            <Icon svg={ClockIconLightMode} data={time} />
+                            <Icon svg={MultiplePeopleIconLightMode} data={enrollment} />
+                        </>
+                    )}
                 </div>
             </div>
         </div>

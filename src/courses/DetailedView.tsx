@@ -1,7 +1,7 @@
 import React from "react"
 import './DetailedView.css';
 import { statusEmoji } from './Card.tsx';
-import ExternalLinkIcon from './external-link.svg';
+import ExternalLinkIcon from '/icons/external-link.svg';
 
 interface DetailedViewProps {
     details: string,
