@@ -1,7 +1,8 @@
 import React from "react"
 import './DetailedView.css';
 import { statusEmoji } from './Card.tsx';
-import ExternalLinkIcon from './external-link.svg';
+import ExternalLinkIcon from '/icons/external-link.svg';
+import BackIcon from '/icons/back-arrow.svg';
 
 interface DetailedViewProps {
     details: string,
@@ -25,8 +26,8 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link, is
     const spacer = (<div style={{ height: '0px', margin: '20px 0' }}></div>)
 
     const containerStyle = isMobile ? {
-        maxHeight: '80vh',
-        overflowY: 'auto' as 'auto',
+        maxHeight: '100vh',
+        overflowY: 'auto',
         width: '100%',
         padding: '0 10px'
     } : {};
@@ -43,22 +44,20 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link, is
                 {isMobile && (
                     <button
                         onClick={handleBack}
-                        style={{
-                            margin: '10px 0',
-                            padding: '8px 16px',
-                            backgroundColor: '#007bff',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            marginBottom: '0px'
-                        }}
+                        className="pisaButton"
+                        style={{backgroundColor: '#007bff'}}
                     >
-                        {"<-"}
+                        <img
+                            src={BackIcon}
+                            alt="Back"
+                            width="20px"
+                            height="20px"
+                            style={{ verticalAlign: 'middle' }}
+                        />
                     </button>
                 )}
                 <div>
-                    <h3 style={isMobile ? { fontSize: '1.2rem' } : {}}>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
+                    <h3 style={isMobile ? { fontSize: '1.2rem', paddingLeft: '7px', paddingRight: '0px' } : {}}>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
                 </div>
                 <button
                     onClick={() => window.open(link, '_blank')}

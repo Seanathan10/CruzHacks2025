@@ -122,6 +122,7 @@ export default function Courses() {
 									location={course.location}
 									time={course.time}
 									enrollment={course.enrolled}
+									summerSession={course.summer_session}
 									term={term}
 									classID={course.class_number}
 									onCardClick={(classTerm: string, classID: string) => {

@@ -1,5 +1,5 @@
 import './Search.css';
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 interface SearchProps {
 	onSearchBoxInput: (query: string) => void;
@@ -50,7 +50,7 @@ const Search: React.FC<SearchProps> = ({ onSearchBoxInput, onGoButtonPressed }) 
 				<button 
 					style={{
 						padding: '12px 20px 13px 20px', 
-						backgroundColor: "#e78182", 
+						backgroundColor: "#4f6fff", 
 						borderRadius: '0 8px 8px 0'
 					}}
 					onClick={onGoButtonPressed}
