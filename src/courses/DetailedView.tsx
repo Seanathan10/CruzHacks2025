@@ -23,24 +23,16 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link }) 
     const spacer = (<div style={{height: '0px', margin: '20px 0'}}></div>)
 
     return (
-        <div className="parent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'left' }}>
+        <div className="detailsParent" >
             {spacer}
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+            <div className="titleAndButtonParent">
                 <div>
                     <h3>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
                 </div>
                 <button 
                     onClick={() => window.open(link, '_blank')}
-                    style={{ 
-                        padding: '8px 8px', 
-                        backgroundColor: '#4CAF50', 
-                        borderRadius: '4px', 
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                    }}
+                    className="pisaButton"
                 >
                     <img src={ExternalLinkIcon} alt="View in Pisa" width="20px" height="20px" style={{ verticalAlign: 'middle' }} />
                 </button>
@@ -52,13 +44,13 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link }) 
                     <h3 className="heading">Class Details</h3>
                     <div className="classDetailsGrid">
                         {classDetailsGridEntry("Status", detailsObj.primary_section.enrl_status)}
-                        {classDetailsGridEntry("Capacity", detailsObj.primary_section.capacity)}
-                        {classDetailsGridEntry("Total", detailsObj.primary_section.enrl_total)}
-                        {classDetailsGridEntry("Waitlist", detailsObj.primary_section.waitlist_capacity)}
+                        {classDetailsGridEntry("Enrolled", detailsObj.primary_section.enrl_total + ' / ' + detailsObj.primary_section.capacity)}
+                        {classDetailsGridEntry("Waitlist", detailsObj.primary_section.waitlist_capacity + ' / ' + detailsObj.primary_section.waitlist_total)}
                         {classDetailsGridEntry("Credits", detailsObj.primary_section.credits)}
                         {classDetailsGridEntry("GenEd", detailsObj.primary_section.gened || "None")}
                         {classDetailsGridEntry("Modality", modality)}
                         {classDetailsGridEntry("Class ID", detailsObj.primary_section.class_nbr)}
+                        {classDetailsGridEntry("Career", detailsObj.primary_section.acad_career)}
                     </div>
                 </div>}
 
