@@ -9,7 +9,7 @@ const style = {
     // overflow: 'visible',
     textOverflow: 'wrap',
     whiteSpace: 'nowrap',
-    paddingLeft: 12.5,
+    paddingLeft: 15,
     paddingRight: 12.5,
     paddingTop: 0,
     paddingBottom: 0,
@@ -33,7 +33,7 @@ export default function FoodBlock({children}: {children: FoodItem}) {
             <div style={{display: 'flex', justifyContent: 'flex-end',
                 alignItems: 'center'}}>
                 {children.restrictions.map((restriction: string) => (
-                    <span style={{margin: 2, marginRight: 0, fontSize: 18}} key={restriction}>{restriction}</span>
+                    <span style={{margin: 3, marginRight: 0, fontSize: 18}} key={restriction}>{restriction}</span>
                 ))}
             </div>
         </div>

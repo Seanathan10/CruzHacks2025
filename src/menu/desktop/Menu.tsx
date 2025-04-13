@@ -1,17 +1,17 @@
-import { useContext, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Context } from "../../Context.tsx";
 import {MenuPanel} from "../MenuPanel.tsx";
 import {type Menu} from "../api.ts";
 
 export function Menu({children}: {children: Record<string, Menu>}) {
-    const cv = useContext(Context);
+    const [desktopMenuHeight, setDesktopMenuHeight] = useState(0);
     const measureRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const updateScroll = () => {
             if (measureRef.current) {
                 console.log("measureRef", measureRef.current.scrollHeight - measureRef.current.clientHeight);
-                cv?.setDesktopMenuHeight(measureRef.current.scrollHeight - measureRef.current.clientHeight + 25);
+                setDesktopMenuHeight(measureRef.current.scrollHeight - measureRef.current.clientHeight + 25);
             }
         }
         updateScroll();
@@ -30,7 +30,7 @@ export function Menu({children}: {children: Record<string, Menu>}) {
                 {Object.entries(children).map(([location, menu]: [string, Menu], i: number) => (
                     // <>
                     <div className={'menuPanel'} key={location} style={{display: 'flex', overflow: 'visible', "--delay": `${i * 150}ms`,
-                        flex: 1, minWidth: '400px', height: `${cv?.desktopMenuHeight}px`,
+                        flex: 1, minWidth: '400px', height: `${desktopMenuHeight}px`,
                         position: 'relative'} as React.CSSProperties}
                     >
                         <MenuPanel key={location} name={location} menu={menu} width="100%"></MenuPanel>
