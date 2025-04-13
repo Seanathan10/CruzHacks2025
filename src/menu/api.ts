@@ -105,16 +105,27 @@ export async function getAllLocationMenus(day_offset: number = 0): Promise<Recor
     return locationMenus;
 }
 
+const CACHE_EXPIRATION_TIME = 24 * 60 * 60 * 500    // 12 hours
 async function getCachedMenu(dateString: string): Promise<Record<string, Menu> | null> {
     const cachedMenu = localStorage.getItem('cached_menu_' + dateString);
-    if (cachedMenu) {
-        return JSON.parse(cachedMenu);
+    if (!cachedMenu) {
+        return null;
     }
-    return null;
+    const parsedMenu = JSON.parse(cachedMenu);
+    const currentTime = Date.now();
+    const timeDiff = currentTime - parsedMenu.timestamp;
+    console.log('timeDiff:', timeDiff);
+    if (timeDiff > CACHE_EXPIRATION_TIME) {
+        console.log('Cached menu expired for date:', dateString);
+        localStorage.removeItem('cached_menu_' + dateString);
+        return null;
+    }
+    console.log('Using cached menu for date:', dateString);
+    return parsedMenu.data;
 }
 
 async function setCachedMenu(dateString: string, menus: Record<string, Menu>) {
     console.log('Setting cached menu for date:', dateString);
-    localStorage.setItem('cached_menu_' + dateString, JSON.stringify(menus));
+    localStorage.setItem('cached_menu_' + dateString, JSON.stringify({data: menus, timestamp: Date.now()}));
 }
 
