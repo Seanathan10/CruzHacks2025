@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
-import { useMediaQuery } from "@mantine/hooks";
 import { TopBar as MobileTopBar } from "../dashboard/mobile/TopBar";
 import { TopBar as DesktopTopBar } from "../dashboard/desktop/TopBar";
-
 import Card from "./Card";
 import DetailedView from "./DetailedView";
 import Search from './Search.tsx';
 import './Courses.css';
+import { ButtonGroupSection } from "@mantine/core";
 
+// Add useMediaQuery hook
+const useMediaQuery = (query: string) => {
+	const [matches, setMatches] = useState(window.matchMedia(query).matches);
 
+	useEffect(() => {
+		const media = window.matchMedia(query);
+		const listener = () => setMatches(media.matches);
+		media.addEventListener("change", listener);
+		return () => media.removeEventListener("change", listener);
+	}, [query]);
+
+	return matches;
+};
 
 function parseInput(query: string) {
 	let results = {
@@ -22,25 +33,22 @@ function parseInput(query: string) {
 	const deptResults = deptExtractor.exec(query);
 	if (deptResults) results["dept"] = deptResults[0].toUpperCase();
 
-
 	const catalogNumExtractor = new RegExp('([0-9]{1,3}[a-zA-Z]?)');
 	const cnumResults = catalogNumExtractor.exec(query);
 	if (cnumResults) results["catalogNum"] = cnumResults[0].toUpperCase();
 
-
 	return results;
 }
-
 
 export default function Courses() {
 	const [courseData, setCourseData] = useState<any[]>([]);
 	const [loading, setLoading] = useState(true);
-	const isMobile = useMediaQuery("(max-width: 600px)");
-	const [selectedCourseID, setSelectedCourseID] = useState<number>(0);
+	const isMobile = useMediaQuery("(max-width: 768px)");
 	const [detailedData, setDetailedData] = useState<any>(null);
 	const [selectedClassModality, setSelectedClassModality] = useState<string>("");
 	const [selectedClassLink, setSelectedClassLink] = useState<string>("");
 	const [inputData, setInputData] = useState<{ dept: string; catalogNum: string }>({ dept: "", catalogNum: "" });
+	const [showDetails, setShowDetails] = useState(false);
 
 	//filter states
 	const [term, setTerm] = useState<string>("2252");
@@ -48,9 +56,8 @@ export default function Courses() {
 	const [status, setStatus] = useState<string>("all");
 	const [time, setTimes] = useState<string>("");
 
-
-	const TERM = 2252;
-
+	// Rest of your existing functions...
+	
 	async function fetchCourses() {
 		try {
 			setLoading(true);
@@ -65,35 +72,21 @@ export default function Courses() {
 		}
 	}
 
-
-	// useEffect(() => {
-	// 	fetchCourses();
-	// }, []);
-
-	// useEffect(() => {
-	// 	getDetailedView()//.then(() => { console.log(detailedData) });
-	// }, [selectedCourseID]);
-
-
 	const getDetailedView = async (courseTerm: string, courseID: string) => {
 		console.log("detailed view called with term", courseTerm)
 		const response = await fetch(`https://my.ucsc.edu/PSIGW/RESTListeningConnector/PSFT_CSPRD/SCX_CLASS_DETAIL.v1/${courseTerm}/${courseID}`);
 		const data = await response.text();
 
 		setDetailedData(data);
+		if (isMobile) setShowDetails(true);
 	}
-
 
 	const onSearch = (query: string) => {
 		console.log("query is", query);
-
 		let parse = parseInput(query);
 		console.log(parse);
 		setInputData(parse);
-
 		console.log("parsed", parse)
-
-		// fetchCourses();
 	}
 
 	useEffect(() => {
@@ -102,29 +95,36 @@ export default function Courses() {
 
 	const spacer = (<div style={{ height: '0px', margin: '30px 0' }}></div>)
 
+	// Back button function for mobile view
+	const handleBack = () => {
+		setShowDetails(false);
+	};
 
 	return (
 		<div className="courses-page">
 			<div className="topbar-container">
 				{isMobile ? <MobileTopBar /> : <DesktopTopBar />}
 			</div>
-			<div className="parent">
-				<div className="contentLeft">
+			<div className="parent" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+				<div 
+					className="contentLeft" 
+					style={{ 
+						width: isMobile ? '100%' : '30%', 
+						display: isMobile && showDetails ? 'none' : 'flex' 
+					}}
+				>
 					{spacer}
 
-					<div className="search-wrapper">
+					<div className="search-wrapper" style={{ width: isMobile ? '95%' : '83%' }}>
 						<Search onSearchBoxInput={(query) => { onSearch(query) }} onGoButtonPressed={fetchCourses} />
-						<div className="filters" style={{ width: '100%', paddingLeft: '10px' }}>
+						<div className="filters" style={{ width: '100%', paddingLeft: isMobile ? '0px' : '10px', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '8px' : '0' }}>
 							<select
 								name="quarter"
 								id="quarter"
 								className="dropdown"
-								style={{ width: 'calc(30% - 3px)' }}
+								style={{ width: isMobile ? '100%' : 'calc(30% - 3px)' }}
 								value={term}
-								onChange={(e) => {
-									setTerm(e.target.value);
-									// fetchCourses();
-								}}
+								onChange={(e) => { setTerm(e.target.value); }}
 							>
 								<option value="2254">Summer 2025</option>
 								<option value="2252">Spring 2025</option>
@@ -135,20 +135,18 @@ export default function Courses() {
 								name="GE"
 								id="GE"
 								className="dropdown"
-								style={{ width: 'calc(20% - 3px)', marginLeft: '4px' }}
-								onChange={(e) => {
-									setGE(e.target.value)
-								}}
+								style={{ width: isMobile ? '100%' : 'calc(20% - 3px)', marginLeft: isMobile ? '0' : '4px' }}
+								onChange={(e) => { setGE(e.target.value) }}
 							>
-								{["AnyGE", "AH&I", "C", "CC", "ER", "IM", "MF", "PE-E", "PE-H", "PE-T", "PR-C", "PR-E", "PR-S", "SI", "SR", "TA"].map((ge: string, _: number) => {
-									return (<option value={ge}>{ge}</option>);
-								})}
+								{["AnyGE", "AH&I", "C", "CC", "ER", "IM", "MF", "PE-E", "PE-H", "PE-T", "PR-C", "PR-E", "PR-S", "SI", "SR", "TA"].map((ge: string, idx: number) => (
+									<option key={idx} value={ge}>{ge}</option>
+								))}
 							</select>
 							<select
 								name="status"
 								id="status"
 								className="dropdown"
-								style={{ width: 'calc(17% - 3px)', marginLeft: '4px' }}
+								style={{ width: isMobile ? '100%' : 'calc(17% - 3px)', marginLeft: isMobile ? '0' : '4px' }}
 								onChange={(e) => { setStatus(e.target.value) }}
 							>
 								<option value="all">All</option>
@@ -158,7 +156,7 @@ export default function Courses() {
 								name="times"
 								id="times"
 								className="dropdown"
-								style={{ width: 'calc(33% - 3px)', marginLeft: '4px' }}
+								style={{ width: isMobile ? '100%' : 'calc(33% - 3px)', marginLeft: isMobile ? '0' : '4px' }}
 								onChange={(e) => { setTimes(e.target.value) }}
 							>
 								<option value="">All Times</option>
@@ -183,7 +181,7 @@ export default function Courses() {
 							</select>
 						</div>
 					</div>
-					<div className="courseList">
+					<div className="courseList" style={{ marginTop: isMobile ? '20px' : '50px' }}>
 						{loading ? <p>Loading courses...</p> :
 							courseData.map((course: any, index: number) => (
 								<Card
@@ -194,22 +192,29 @@ export default function Courses() {
 									location={course.location}
 									time={course.time}
 									enrollment={course.enrolled}
-									term={term} //temp
+									term={term}
 									classID={course.class_number}
-									onCardClick={(classTerm: string, classID: string) => {setSelectedClassLink("https://pisa.ucsc.edu/class_search/" + course.link);  setSelectedClassModality(course.modality); getDetailedView(classTerm, classID); }}
+									onCardClick={(classTerm: string, classID: string) => {
+										setSelectedClassLink("https://pisa.ucsc.edu/class_search/" + course.link);
+										setSelectedClassModality(course.modality);
+										getDetailedView(classTerm, classID);
+									}}
 								/>
 							))
 						}
 					</div>
 				</div>
-				<div className="contentRight">
-					{detailedData ? <DetailedView details={detailedData} modality={selectedClassModality} link={selectedClassLink} /> :
-						<>
-							{/* <div style={{height: '0px', margin: '20px 0'}}></div> */}
-							<div style={{ backgroundColor: '#2a2a2a', width: '100%', height: '100%' }}>
-
-							</div>
-						</>
+				<div 
+					className="contentRight" 
+					style={{ 
+						display: (isMobile && !showDetails) ? 'none' : 'block',
+						height: isMobile ? 'auto' : 'calc(100vh - 60px)',
+						minHeight: isMobile ? 'calc(100vh - 60px)' : 'auto'
+					}}
+				>
+					{spacer}
+					{detailedData ? <DetailedView details={detailedData} modality={selectedClassModality} link={selectedClassLink} isMobile={isMobile} handleBack={handleBack} /> :
+						<div style={{ backgroundColor: '#2a2a2a', width: '100%', height: '100%' }}></div>
 					}
 				</div>
 			</div>
