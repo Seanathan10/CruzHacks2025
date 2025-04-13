@@ -2,9 +2,10 @@ from fastapi import FastAPI, Request, HTTPException
 from . import scraper
 import urllib.parse
 from fastapi.middleware.cors import CORSMiddleware
-from backend import news
+from backend import news, AI
 from . import menu
 # from fastapi.middleware.cors import CORSMiddleware
+
 
 api: FastAPI = FastAPI()
 api.add_middleware(
@@ -50,3 +51,4 @@ async def get_menu(location: menu.LocationRequest, day_offset: int = 0):
     return shortmenu
 
 api.include_router(news.router)
+api.include_router(AI.router)

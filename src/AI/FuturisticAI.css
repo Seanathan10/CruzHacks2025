@@ -1,0 +1,238 @@
+html, body {
+    font-family: 'Dongle', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .AIPage {
+    position: relative;
+    z-index: 10;
+    min-height: calc(100vh - 60px);
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Orbitron', sans-serif;
+    color: #e0e0ff;
+    text-shadow: 0 0 5px #6f00ff;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, #f0f, #00f, #0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: flicker 3s infinite;
+  }
+  
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      opacity: 1;
+    }
+    20%, 24%, 55% {
+      opacity: 0.4;
+    }
+  }
+  
+  .AIInput {
+    width: 90%;
+    max-width: 600px;
+    min-height: 120px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border: 2px solid #00eaff;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    color: #e0f7ff;
+    margin-bottom: 1.25rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px #00caff88;
+    resize: vertical;
+    transition: all 0.3s ease;
+  }
+  
+  .AIInput:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 25px #00f0ffcc;
+  }
+  
+  .AIButton {
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111;
+    background: linear-gradient(to right, #00eaff, #6f00ff);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px #00eaff88;
+  }
+  
+  .AIButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00f0ffcc;
+  }
+  
+  .AIButton:disabled {
+    background-color: #444;
+    color: #999;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .AIOutput {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 700px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    border: 2px solid #7f00ff;
+    backdrop-filter: blur(10px);
+    color: #c0f5ff;
+    font-size: 1rem;
+    line-height: 1.6;
+    box-shadow: 0 0 30px #aa00ff55;
+    text-shadow: 0 0 4px #7f00ff;
+    word-wrap: break-word;
+  }
+  
+  .AIOutput h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: #ffffff;
+    text-shadow: 0 0 6px #ff00ff;
+  }
+  
+  
+  :root {
+    --color-bg1: rgb(108, 0, 162);
+    --color-bg2: rgb(0, 17, 82);
+    --color1: 18, 113, 255;
+    --color2: 221, 74, 255;
+    --color3: 100, 220, 255;
+    --color4: 200, 50, 50;
+    --color5: 180, 180, 50;
+    --color-interactive: 140, 100, 255;
+    --circle-size: 80%;
+    --blending: hard-light;
+  }
+  
+  .gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+    pointer-events: none;
+  }
+  
+  
+  .gradient-bg svg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .gradients-container {
+    filter: url(#goo) blur(40px);
+    width: 100%;
+    height: 100%;
+  }
+  
+  .g1, .g2, .g3, .g4, .g5, .interactive {
+    position: absolute;
+    mix-blend-mode: var(--blending);
+    border-radius: 50%;
+    opacity: 1;
+  }
+  
+  .g1 {
+    background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%);
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+    transform-origin: center center;
+    animation: moveVertical 30s ease infinite;
+  }
+  
+  .g2 {
+    background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%);
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+    transform-origin: calc(50% - 400px);
+    animation: moveInCircle 20s reverse infinite;
+  }
+  
+  .g3 {
+    background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%);
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2 + 200px);
+    left: calc(50% - var(--circle-size) / 2 - 500px);
+    transform-origin: calc(50% + 400px);
+    animation: moveInCircle 40s linear infinite;
+  }
+  
+  .g4 {
+    background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%);
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+    transform-origin: calc(50% - 200px);
+    animation: moveHorizontal 40s ease infinite;
+    opacity: 0.7;
+  }
+  
+  .g5 {
+    background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%);
+    width: calc(var(--circle-size) * 2);
+    height: calc(var(--circle-size) * 2);
+    top: calc(50% - var(--circle-size));
+    left: calc(50% - var(--circle-size));
+    transform-origin: calc(50% - 800px) calc(50% + 200px);
+    animation: moveInCircle 20s ease infinite;
+  }
+  
+  .interactive {
+    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%);
+    width: 100%;
+    height: 100%;
+    top: -50%;
+    left: -50%;
+    opacity: 0.7;
+  }
+  
+  @keyframes moveInCircle {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes moveVertical {
+    0% { transform: translateY(-50%); }
+    50% { transform: translateY(50%); }
+    100% { transform: translateY(-50%); }
+  }
+  
+  @keyframes moveHorizontal {
+    0% { transform: translateX(-50%) translateY(-10%); }
+    50% { transform: translateX(50%) translateY(10%); }
+    100% { transform: translateX(-50%) translateY(-10%); }
+  }

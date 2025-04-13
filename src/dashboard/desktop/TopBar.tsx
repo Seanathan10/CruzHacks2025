@@ -4,7 +4,8 @@ import TopBarButton from './TopBarButton';
 import ThemeToggle from '../../ThemeChanger';
 
 export function TopBar() {
-    const topBarButtons = ['ucsc.info', 'news', 'peak', 'menu', 'courses'];
+    const topBarButtons = ['ucsc.info', 'news', 'peak', 'menu', 'courses', 'insights'];
+    
     return (
         <header className="app-bar">
             <nav className="nav-bar__nav">

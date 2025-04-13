@@ -10,6 +10,8 @@ import {Context} from './Context.tsx';
 import Courses from './courses/Courses.tsx';
 import { useEffect, useState } from 'react';
 
+import AIComponent from './AI/AI.tsx';
+
 
 function App() {
   const [mobile, setMobile] = useState(false);
@@ -27,6 +29,7 @@ function App() {
           <Route path='/peak' element={<Peak />} />
           <Route path='/courses' element={<Courses />} />
           <Route path='/menu' element={<Menu />} />
+          <Route path='/insights' element={<AIComponent />} />
         </Routes>
       </BrowserRouter>
     </Context.Provider>
