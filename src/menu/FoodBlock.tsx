@@ -17,7 +17,7 @@ const style = {
 }
 
 export default function FoodBlock({children}: {children: FoodItem}) {
-    console.log('children in the food block', children);
+    // console.log('children in the food block', children);
     return (
         <div style={style} className="foodBlock" key={children.name}>
             <div>
