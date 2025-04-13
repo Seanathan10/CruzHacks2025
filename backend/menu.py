@@ -36,6 +36,8 @@ class LocationRequest(Enum):
     PorterKresge = 'Porter/Kresge'
     RachelCarsonOakes = 'Carson/Oakes'
 
+# def store_menu_cache
+
 def fetch_website_html(url: str, locationNum: str, meal: str = '', day_offset = 0) -> str:
     full_url = url + locationNum + ((MEAL_URL + meal) if meal != '' else '')
     if day_offset != 0:
