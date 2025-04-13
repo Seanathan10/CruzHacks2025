@@ -10,21 +10,28 @@ interface MenuPanelProps {
 
 export function MenuPanel(props: MenuPanelProps) {
     return (
-        <div className={'menuPanel'} style={{width: props.width ?? '100%', marginLeft: '2.5%',
+        <div className={'menuPanel'} style={{width: props.width ?? '100%', marginLeft: '2.5%', maxHeight: '80%', top: '130px',
             padding: 0, borderRadius: 10, boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-            display: 'flex', flexDirection: 'column',
-            justifyContent: 'center', minWidth: 350}}>
+            display: 'flex', flexDirection: 'column', position: 'fixed', overflowY: 'scroll',
+            minWidth: '350px'}}>
         {Object.entries(props.menu).map(([mealName, meal]) => (
             <>
-            <MealHeader key={mealName}>{mealName}</MealHeader>
-            {Object.entries(meal).map(([groupName, foodGroup]) => (
-                <>
-                <h4>{groupName}</h4>
-                {Object.entries(foodGroup).map(([foodName, foodItem]) => (
-                    <FoodBlock key={foodName}>{foodItem}</FoodBlock>
+            <div>
+                <MealHeader key={mealName}>{mealName}</MealHeader>
+            </div>
+            <div>
+                {Object.entries(meal).map(([groupName, foodGroup]) => (
+                    <>
+
+                    <h4>{groupName}</h4>
+                    <div>
+                        {Object.entries(foodGroup).map(([foodName, foodItem]) => (
+                            <FoodBlock key={foodName}>{foodItem}</FoodBlock>
+                        ))}
+                    </div>
+                    </>
                 ))}
-                </>
-            ))}
+            </div>
             </>
         ))}
         </div>

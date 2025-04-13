@@ -1,4 +1,3 @@
-import {JsonInput} from "@mantine/core";
 import {FoodItem} from "./api";
 
 const style = {
@@ -18,6 +17,7 @@ const style = {
 }
 
 export default function FoodBlock({children}: {children: FoodItem}) {
+    console.log('children in the food block', children);
     return (
         <div style={style} className="foodBlock" key={children.name}>
             <div>
@@ -26,7 +26,7 @@ export default function FoodBlock({children}: {children: FoodItem}) {
             
             <div style={{display: 'flex', justifyContent: 'flex-end',
                 alignItems: 'center', marginRight: 20}}>
-                {children.restrictions.map((restriction) => (
+                {children.restrictions.map((restriction: string) => (
                     <span style={{margin: 2.5, fontSize: 20}} key={restriction}>{restriction}</span>
                 ))}
             </div>
