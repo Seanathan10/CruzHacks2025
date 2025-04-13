@@ -8,10 +8,8 @@
     flex-direction: column;
     width: 30%;
     height: calc(100vh - 60px);
-    /* Adjust based on topbar height */
     padding: 10px;
     align-items: center;
-    /* border-right: 1px solid #e0e0e0; */
 }
 
 .courseList {

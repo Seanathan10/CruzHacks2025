@@ -3,6 +3,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { TopBar as MobileTopBar } from "../dashboard/mobile/TopBar";
 import { TopBar as DesktopTopBar } from "../dashboard/desktop/TopBar";
 import "./News.css";
+import {Error, Loading} from "../Loading";
 
 type FeedItem = {
   title: string;
@@ -47,20 +48,39 @@ const FEEDS = [
 ];
 
 const RssFeed = () => {
-  const [selectedFeeds, setSelectedFeeds] = useState<string[]>([
-    "press_releases",
-  ]);
+  const [selectedFeeds, setSelectedFeeds] = useState<string[]>(() => {
+    const storedFeeds = localStorage.getItem("selectedFeeds");
+    if (storedFeeds) {
+      return JSON.parse(storedFeeds);
+    }
+    return FEEDS.map((feed) => feed.key); // Default to all feeds selected'
+  });
+
   const [items, setItems] = useState<FeedItem[]>([]);
   const mediaQueryMobile = useMediaQuery("(max-width: 600px)");
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const toggleFeed = (key: string) => {
-    setSelectedFeeds((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
-    );
+    const selected = selectedFeeds.includes(key) ? selectedFeeds.filter((k) => k !== key) : [...selectedFeeds, key]
+    // setSelectedFeeds((prev) =>
+    //   prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+    // );
+    setSelectedFeeds(selected);
+    localStorage.setItem("selectedFeeds", JSON.stringify(selected));
   };
 
   useEffect(() => {
+    setLoading(true);
+    setError(false);
+
     const fetchFeeds = async () => {
+      if (selectedFeeds.length === 0) {
+        setItems([]);
+        setLoading(false);
+        return;
+      }
+
       try {
         const results = await Promise.all(
           FEEDS.filter((f) => selectedFeeds.includes(f.key)).map((feed) =>
@@ -76,10 +96,12 @@ const RssFeed = () => {
 
         setItems(allItems);
       } catch (error) {
+        setError(true);
         console.error("Failed to fetch feeds:", error);
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchFeeds();
   }, [selectedFeeds]);
 
@@ -104,8 +126,11 @@ const RssFeed = () => {
           ))}
         </div>
 
+        
+        {error ? <Error>Error Loading News</Error> :
         <div className="RSS_Feed">
-          <h1>UCSC News</h1>
+        <h1>UCSC News</h1>
+          {loading && <div style={{fontSize: 20, margin: 0, padding: 0}}>Loading...</div>}
           {items.map((item, i) => (
             <div
               key={i}
@@ -129,7 +154,7 @@ const RssFeed = () => {
               <div dangerouslySetInnerHTML={{ __html: item.summary }} />
             </div>
           ))}
-        </div>
+        </div>}
       </div>
     </>
   );

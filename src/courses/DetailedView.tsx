@@ -1,10 +1,15 @@
 import React from "react"
 import './DetailedView.css';
 import { statusEmoji } from './Card.tsx';
+import ExternalLinkIcon from '/icons/external-link.svg';
+import BackIcon from '/icons/back-arrow.svg';
 
 interface DetailedViewProps {
     details: string,
-    modality: string
+    modality: string,
+    link: string,
+    isMobile?: boolean,
+    handleBack: () => void
 }
 
 function classDetailsGridEntry(title: string, content: string) {
@@ -16,34 +21,69 @@ function classDetailsGridEntry(title: string, content: string) {
     )
 }
 
-const DetailedView: React.FC<DetailedViewProps> = ({ details, modality }) => {
+const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link, isMobile, handleBack }) => {
     const detailsObj = JSON.parse(details);
-    const spacer = (<div style={{height: '0px', margin: '20px 0'}}></div>)
+    const spacer = (<div style={{ height: '0px', margin: '20px 0' }}></div>)
+
+    const containerStyle = isMobile ? {
+        maxHeight: '100vh',
+        overflowY: 'auto',
+        width: '100%',
+        padding: '0 10px'
+    } : {};
+
+    const classDetailsGridStyle = isMobile ? {
+        gridTemplateColumns: 'repeat(2, 1fr)'
+    } : {};
 
     return (
-        <div className="parent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'left' }}>
+        <div className="detailsParent" style={containerStyle}>
             {spacer}
 
-            <div>
-                <h3>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
+            <div className="titleAndButtonParent">
+                {isMobile && (
+                    <button
+                        onClick={handleBack}
+                        className="pisaButton"
+                        style={{backgroundColor: '#007bff'}}
+                    >
+                        <img
+                            src={BackIcon}
+                            alt="Back"
+                            width="20px"
+                            height="20px"
+                            style={{ verticalAlign: 'middle' }}
+                        />
+                    </button>
+                )}
+                <div>
+                    <h3 style={isMobile ? { fontSize: '1.2rem', paddingLeft: '7px', paddingRight: '0px' } : {}}>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
+                </div>
+                <button
+                    onClick={() => window.open(link, '_blank')}
+                    className="pisaButton"
+                >
+                    <img src={ExternalLinkIcon} alt="View in Pisa" width="20px" height="20px" style={{ verticalAlign: 'middle' }} />
+                </button>
             </div>
 
 
             {detailsObj.primary_section &&
                 <div className="classDetails">
                     <h3 className="heading">Class Details</h3>
-                    <div className="classDetailsGrid">
+                    <div className="classDetailsGrid" style={classDetailsGridStyle}>
                         {classDetailsGridEntry("Status", detailsObj.primary_section.enrl_status)}
-                        {classDetailsGridEntry("Capacity", detailsObj.primary_section.capacity)}
-                        {classDetailsGridEntry("Total", detailsObj.primary_section.enrl_total)}
-                        {classDetailsGridEntry("Waitlist", detailsObj.primary_section.waitlist_capacity)}
+                        {classDetailsGridEntry("Enrolled", detailsObj.primary_section.enrl_total + ' / ' + detailsObj.primary_section.capacity)}
+                        {classDetailsGridEntry("Waitlist", detailsObj.primary_section.waitlist_capacity + ' / ' + detailsObj.primary_section.waitlist_total)}
                         {classDetailsGridEntry("Credits", detailsObj.primary_section.credits)}
                         {classDetailsGridEntry("GenEd", detailsObj.primary_section.gened || "None")}
                         {classDetailsGridEntry("Modality", modality)}
                         {classDetailsGridEntry("Class ID", detailsObj.primary_section.class_nbr)}
+                        {classDetailsGridEntry("Career", detailsObj.primary_section.acad_career)}
                     </div>
                 </div>}
 
+            {/* Rest of the component remains the same */}
             {detailsObj.primary_section.description &&
                 <div className="description classDetails">
                     <h3 className="heading">Description</h3>
@@ -82,7 +122,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality }) => {
                         if (!section.meetings) return null;
 
                         return (
-                            <div key={index} className="section-card" style={{ 
+                            <div key={index} className="section-card" style={{
                                 borderRadius: '8px',
                             }}>
                                 {index > 0 && <hr style={{ margin: '0 0 15px 0', borderTop: '1px solid #dee2e6' }} />}

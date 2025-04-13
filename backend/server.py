@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend import news, AI
 from . import menu
 # from fastapi.middleware.cors import CORSMiddleware
-
+from datetime import datetime
 
 api: FastAPI = FastAPI()
 api.add_middleware(
@@ -47,9 +47,17 @@ async def getPath():
 
 @api.get("/menu")
 async def get_menu(location: menu.LocationRequest, day_offset: int = 0):
+    start_time = datetime.now()
     shortmenu = menu.get_short_menu(menu.LOCATION_MAP[location.value].value, day_offset)
-    print(shortmenu)
+    print("Time taken to get short menu:", datetime.now() - start_time)
     return shortmenu
 
 api.include_router(news.router)
 api.include_router(AI.router)
+
+@api.get('/all_menus')
+async def get_all_menus(day_offset: int = 0):
+    start_time = datetime.now()
+    menus = menu.get_all_menus(day_offset)
+    print("Time taken to get all menus:", datetime.now() - start_time)
+    return menus
