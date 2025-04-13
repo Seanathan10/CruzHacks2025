@@ -6,7 +6,9 @@ import ExternalLinkIcon from './external-link.svg';
 interface DetailedViewProps {
     details: string,
     modality: string,
-    link: string
+    link: string,
+    isMobile?: boolean,
+    handleBack: () => void
 }
 
 function classDetailsGridEntry(title: string, content: string) {
@@ -18,19 +20,47 @@ function classDetailsGridEntry(title: string, content: string) {
     )
 }
 
-const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link }) => {
+const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link, isMobile, handleBack }) => {
     const detailsObj = JSON.parse(details);
-    const spacer = (<div style={{height: '0px', margin: '20px 0'}}></div>)
+    const spacer = (<div style={{ height: '0px', margin: '20px 0' }}></div>)
+
+    const containerStyle = isMobile ? {
+        maxHeight: '80vh',
+        overflowY: 'auto' as 'auto',
+        width: '100%',
+        padding: '0 10px'
+    } : {};
+
+    const classDetailsGridStyle = isMobile ? {
+        gridTemplateColumns: 'repeat(2, 1fr)'
+    } : {};
 
     return (
-        <div className="detailsParent" >
+        <div className="detailsParent" style={containerStyle}>
             {spacer}
 
             <div className="titleAndButtonParent">
+                {isMobile && (
+                    <button
+                        onClick={handleBack}
+                        style={{
+                            margin: '10px 0',
+                            padding: '8px 16px',
+                            backgroundColor: '#007bff',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            marginBottom: '0px'
+                        }}
+                    >
+                        {"<-"}
+                    </button>
+                )}
                 <div>
-                    <h3>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
+                    <h3 style={isMobile ? { fontSize: '1.2rem' } : {}}>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
                 </div>
-                <button 
+                <button
                     onClick={() => window.open(link, '_blank')}
                     className="pisaButton"
                 >
@@ -42,7 +72,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link }) 
             {detailsObj.primary_section &&
                 <div className="classDetails">
                     <h3 className="heading">Class Details</h3>
-                    <div className="classDetailsGrid">
+                    <div className="classDetailsGrid" style={classDetailsGridStyle}>
                         {classDetailsGridEntry("Status", detailsObj.primary_section.enrl_status)}
                         {classDetailsGridEntry("Enrolled", detailsObj.primary_section.enrl_total + ' / ' + detailsObj.primary_section.capacity)}
                         {classDetailsGridEntry("Waitlist", detailsObj.primary_section.waitlist_capacity + ' / ' + detailsObj.primary_section.waitlist_total)}
@@ -54,6 +84,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link }) 
                     </div>
                 </div>}
 
+            {/* Rest of the component remains the same */}
             {detailsObj.primary_section.description &&
                 <div className="description classDetails">
                     <h3 className="heading">Description</h3>
@@ -92,7 +123,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link }) 
                         if (!section.meetings) return null;
 
                         return (
-                            <div key={index} className="section-card" style={{ 
+                            <div key={index} className="section-card" style={{
                                 borderRadius: '8px',
                             }}>
                                 {index > 0 && <hr style={{ margin: '0 0 15px 0', borderTop: '1px solid #dee2e6' }} />}
