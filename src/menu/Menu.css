@@ -24,6 +24,10 @@
     }
 }
 
+.dateHeader {
+	background-color: var(--bg-color);
+}
+
 .mealName {
     color: var(--text-color);
 }

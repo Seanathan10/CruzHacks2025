@@ -1,7 +1,6 @@
 
 import {TopBar as MobileTopBar} from "../dashboard/mobile/TopBar";
 import {TopBar as DesktopTopBar} from "../dashboard/desktop/TopBar";
-import { useRef, useContext, useEffect, useState } from "react";
 import { Context } from "../Context";
 import {Menu as MobileMenu} from './mobile/Menu';
 import {Menu as DesktopMenu} from './desktop/Menu';
@@ -12,6 +11,7 @@ import './Menu.css'
 import {MenuPanel} from "./MenuPanel";
 import '../Loading.css';
 import {Error, Loading} from "../Loading";
+import {useRef, useContext, useEffect, useState} from "react";
 
 const months = [
     'January',
@@ -58,17 +58,14 @@ export default function MenuPage() {
         })()
     }, []);
     const today = new Date();
-    const todayDisplay = `${weekdays[today.getDay()]}, ${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
+    const todayDisplay = `Menus for ${weekdays[today.getDay()]}, ${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
     return (
         <>
             {contextValues?.mobile ? (<MobileTopBar />) : (<DesktopTopBar />)}
             <DateHeader>{todayDisplay}</DateHeader>
-            {loading ? <Loading/> : error ? <Error/> : (
+            {loading ? <Loading/> : error ? <Error>Error Loading Menus</Error> : (
             <div style={{width: '100vw', height: '100vh', overflow: 'scroll', position: 'fixed', left: '0px', top: '30px'}}>
-                <div className="MenuPanelDelay"
-                style={{ "--delay": `${1 * 115}ms` } as React.CSSProperties}
-                >
-                    {/* {contextValues?.mobile ? (<MobileMenu>{menuData[Location.CowellStevenson]}</MobileMenu>) : (<DesktopMenu>{menuData}</DesktopMenu>)} */}
+                <div className="MenuPanelDelay" style={{ "--delay": `${1 * 115}ms` } as React.CSSProperties}>
                     {contextValues?.mobile ? (<MobileMenu>{menuData}</MobileMenu>) : (<DesktopMenu>{menuData}</DesktopMenu>)}
                 </div>
             </div>
