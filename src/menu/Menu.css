@@ -30,7 +30,7 @@
 
 .groupName {
     /* background-color: var(--bg-color); */
-    color: var(--link-color);
+    color: var(--link-hover);
 }
 
 .menuPanel {

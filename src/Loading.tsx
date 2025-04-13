@@ -1,17 +1,17 @@
 
 export function Loading() {
     return (
-        <div className="loading">
+        <div style={{margin: 'auto'}} className="loading">
             <div className="loading-spinner"></div>
             <div className="loading-text"></div>
         </div>
     );
 }
 
-export function Error() {
+export function Error({children}: {children: string}) {
     return (
-    <div className="loading">
-        <div className="loading-text">Error loading menu</div>
+    <div style={{margin: 'auto'}} className="loading">
+        <div className="loading-text">{children}</div>
     </div>
     )
 }

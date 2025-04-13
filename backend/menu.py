@@ -36,15 +36,44 @@ class LocationRequest(Enum):
     PorterKresge = 'Porter/Kresge'
     RachelCarsonOakes = 'Carson/Oakes'
 
-# def store_menu_cache
 
-def fetch_website_html(url: str, locationNum: str, meal: str = '', day_offset = 0) -> str:
+# Store menu cache in dictionary, with locationNum and date as a key, menu, timestamp as value
+
+# CACHE_AGE_SECONDS = 60 * 60 * 24 / 2 # Refresh 2 times a day
+# menu_cache = {}
+
+# def get_menu_cache(locationNum: str, date: str) -> dict:
+#     if locationNum not in menu_cache:
+#         return None
+#     if date not in menu_cache[locationNum]:
+#         return None
+#     if 'timestamp' not in menu_cache[locationNum][date]:
+#         return None
+#     print((datetime.now() - (menu_cache[locationNum][date]['timestamp'])).total_seconds())
+#     if (datetime.now() - menu_cache[locationNum][date]['timestamp']).total_seconds() > CACHE_AGE_SECONDS:
+#         return None
+#     if 'menu' not in menu_cache[locationNum][date]:
+#         return None
+#     if menu_cache[locationNum][date]['menu'] is None:
+#         return None
+#     if menu_cache[locationNum][date]['menu'] == {}:
+#         return None
+#     return menu_cache[locationNum][date]['menu']
+
+# def set_menu_cache(locationNum: str, date: str, menu: dict) -> None:
+#     if locationNum not in menu_cache:
+#         menu_cache[locationNum] = {}
+    
+#     if date not in menu_cache[locationNum]:
+#         menu_cache[locationNum][date] = {}
+#     menu_cache[locationNum][date]['menu'] = menu
+#     menu_cache[locationNum][date]['timestamp'] = datetime.now()
+
+
+def fetch_website_html(url: str, locationNum: str, meal: str = '', date: str = '') -> str:
     full_url = url + locationNum + ((MEAL_URL + meal) if meal != '' else '')
-    if day_offset != 0:
-        date = datetime.now() + timedelta(days=day_offset)
-        date_str = date.strftime('%m/%d/%Y')
-
-        date_str = date_str.replace('/', '%2F')
+    if date != '':
+        date_str = date.replace('/', '%2F')
         full_url += f'&dtdate={date_str}'
 
     cookies = {
@@ -58,9 +87,22 @@ def fetch_website_html(url: str, locationNum: str, meal: str = '', day_offset = 
     response = requests.get(full_url, cookies=cookies)
     return response.text
 
+def calculate_date(day_offset: int) -> str:
+    date = datetime.now() + timedelta(days=day_offset)
+    date_str = date.strftime('%m/%d/%Y')
+    return date_str
+
 def get_short_menu(locationNum: str, day_offset: int = 0) -> str:
     url = BASE_URL + SHORTMENU_URL
-    html = fetch_website_html(url, locationNum, '', day_offset)
+
+    date_str = calculate_date(day_offset)
+    
+    # cached_menu = get_menu_cache(locationNum, date_str)
+    # print(f'Cached menu: {cached_menu}')
+    # if cached_menu is not None:
+        # return cached_menu
+
+    html = fetch_website_html(url, locationNum, '', date_str)
     soup = BeautifulSoup(html, 'lxml')
 
     menu = {}
@@ -100,4 +142,7 @@ def get_short_menu(locationNum: str, day_offset: int = 0) -> str:
             }
 
         menu[meal_name] = food_items
+
+    # set_menu_cache(locationNum, date_str, menu)
+    # print(f'Set menu of {locationNum}, {date_str}: {menu['Breakfast']['Breakfast'][1]}')
     return menu
