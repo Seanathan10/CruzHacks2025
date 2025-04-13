@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^0.8.0",
     "@mantine/core": "^7.17.4",
     "@mantine/hooks": "^7.17.4",
     "react": "^19.0.0",
