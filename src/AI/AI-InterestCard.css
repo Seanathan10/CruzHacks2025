@@ -1,48 +1,55 @@
 .ucsc-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 18px;
-    padding: 1rem 1.25rem;
-    margin: 1rem auto;
-    width: 100%;
-    max-width: 320px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    color: white;
-    font-family: 'Inter', sans-serif;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: clamp(0.75rem, 3vw, 1.25rem);
+  margin: 1rem auto;
+  width: 100%;
+  max-width: min(90vw, 320px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.ucsc-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ucsc-card-header h3 {
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  margin: 0;
+  word-break: break-word;
+}
+
+.ucsc-icon {
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  flex-shrink: 0;
+}
+
+.ucsc-card-body p {
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.ucsc-card-body hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 0.75rem 0;
+}
+
+.ucsc-card-body a {
+  color: #80deea;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .ucsc-card {
+    padding: 0.75rem 1rem;
   }
-  
-  .ucsc-card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .ucsc-card-header h3 {
-    font-size: 1.1rem;
-    margin: 0;
-  }
-  
-  .ucsc-icon {
-    font-size: 1.5rem;
-  }
-  
-  .ucsc-card-body p {
-    font-size: 0.95rem;
-    margin: 0.3rem 0;
-    line-height: 1.4;
-  }
-  
-  .ucsc-card-body hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 0.75rem 0;
-  }
-  
-  .ucsc-card-body a {
-    color: #80deea;
-    font-weight: 500;
-    text-decoration: none;
-  }
-  
+}
