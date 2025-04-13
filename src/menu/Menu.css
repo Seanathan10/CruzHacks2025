@@ -1,0 +1,25 @@
+
+.menuPanel {
+    background-color: var(--card-bg);
+    transition: 0.5s ease-in-out;
+    &:hover {
+        transform: translateX(100);
+    }
+}
+
+/* .MenuPanelDelay {
+    top: '100%';
+    transition: 0.5s ease-in;
+    &:hover {
+        top: '0%';
+    }
+} */
+
+.foodBlock {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: 0.5s ease-in-out;
+    &:hover {
+        background-color: var(--bg-color);
+    }
+}

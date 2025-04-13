@@ -1,16 +1,35 @@
+import {JsonInput} from "@mantine/core";
+import {FoodItem} from "./api";
+
 const style = {
-    background: 'gold',
-    color: 'black',
-    width: '145px',
+    // background: va,
+    // color: 'black',
+    fontSize: '0.9rem',
+    width: '100%',
     overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap'
+    textOverflow: 'wrap',
+    whiteSpace: 'nowrap',
+    paddingTop: 0,
+    paddingBottom: 0,
+    // paddingVertical: '15px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
 }
 
-export default function FoodBlock({children}: {children: String}) {
+export default function FoodBlock({children}: {children: FoodItem}) {
     return (
-        <div style={style}>
-            {children}
+        <div style={style} className="foodBlock" key={children.name}>
+            <div>
+                <p style={{justifySelf: 'flex-start', marginLeft: 20}}>{children.name}</p>
+            </div>
+            
+            <div style={{display: 'flex', justifyContent: 'flex-end',
+                alignItems: 'center', marginRight: 20}}>
+                {children.restrictions.map((restriction) => (
+                    <span style={{margin: 2.5, fontSize: 20}} key={restriction}>{restriction}</span>
+                ))}
+            </div>
         </div>
     );
 }

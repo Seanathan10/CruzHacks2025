@@ -4,7 +4,7 @@ import Dashboard from './dashboard/Dashboard';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import RssFeed from './news/News.tsx';
 import Peak from './peak';
-import Menu from './menu/mobile/Menu.tsx';
+import Menu from './menu/Menu.tsx';
 import {Context} from './Context.tsx';
 
 import Courses from './courses/Courses.tsx';

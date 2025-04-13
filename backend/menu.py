@@ -96,6 +96,7 @@ def get_short_menu(locationNum: str, day_offset: int = 0) -> str:
                 restrictions.append(EMOJIS[restriction_name] if restriction_name in EMOJIS else restriction_name)
 
             food_items[current_group][food_name] = {
+                'name': food_name,
                 'restrictions': restrictions,
             }
 
