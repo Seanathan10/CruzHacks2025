@@ -33,6 +33,8 @@ const Card: React.FC<CardProps> = ({ classStatus, className, instructor, locatio
                     <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Location:</span> {location}</p>
                     <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Time:</span> {time}</p>
                     <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Enrollment:</span> {enrollment}</p>
+                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>Term:</span> {term}</p>
+                    <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>ID:</span> {classID}</p>
                 </div>
             </div>
         </div>
