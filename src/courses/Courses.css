@@ -6,7 +6,7 @@
 .contentLeft {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    /* width: 30%; */
     height: calc(100vh - 60px);
     padding: 10px;
     align-items: center;
