@@ -38,7 +38,7 @@
     color: white;
     padding-top: 4rem;
     transition: left 0.3s ease;
-    z-index: 1001;
+    z-index: 500;
 }
 
 .drawer.open {
@@ -56,4 +56,32 @@
     color: white;
     text-decoration: none;
     font-weight: 500;
+}
+
+
+.hamburger {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+  
+.hamburger span {
+    display: block;
+    height: 4px;
+    background-color: gold;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+  
+.hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
 }

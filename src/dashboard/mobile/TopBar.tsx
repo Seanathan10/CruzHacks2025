@@ -9,16 +9,21 @@ export function TopBar() {
     return (
         <>
             <header className="app-bar">
-                <button onClick={() => {cv?.drawerFunction(!(cv?.drawer))}}>
-                    hamburger
-                </button>
+            
+                <div className={`hamburger ${cv?.drawer ? 'open' : ''}`}
+                    onClick={() => cv?.drawerFunction(!cv?.drawer)}
+                >
+                    <span />
+                    <span />
+                    <span />
+                </div>
                 <div className="app-bar__title">ucsc.info</div>
             </header>
 
             <aside className={`drawer ${cv?.drawer ? 'open' : ''}`}>
                 <nav className="drawer__nav">
                     {topBarButtons.map((item) => (
-                        <TopBarButton>{item}</TopBarButton>
+                        <TopBarButton key={item}>{item}</TopBarButton>
                     ))}
                 </nav>
             </aside>
