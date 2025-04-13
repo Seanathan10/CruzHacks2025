@@ -1,116 +1,101 @@
 html, body {
     font-family: 'Dongle', sans-serif;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
   }
 
 
-  .AIPage {
-    position: relative;
-    z-index: 10;
-    min-height: calc(100vh - 60px);
-    padding: 3rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-family: 'Orbitron', sans-serif;
-    color: #e0e0ff;
-    text-shadow: 0 0 5px #6f00ff;
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    background: linear-gradient(to right, #f0f, #00f, #0ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: flicker 3s infinite;
-  }
-  
-  @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-      opacity: 1;
-    }
-    20%, 24%, 55% {
-      opacity: 0.4;
-    }
-  }
-  
-  .AIInput {
-    width: 90%;
-    max-width: 600px;
-    min-height: 120px;
-    background-color: rgba(0, 0, 0, 0.45);
-    border: 2px solid #00eaff;
-    border-radius: 10px;
-    padding: 1rem;
-    font-size: 1.1rem;
-    color: #e0f7ff;
-    margin-bottom: 1.25rem;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 15px #00caff88;
-    resize: vertical;
-    transition: all 0.3s ease;
-  }
-  
-  .AIInput:focus {
-    outline: none;
-    border-color: #00ffff;
-    box-shadow: 0 0 25px #00f0ffcc;
-  }
-  
-  .AIButton {
-    padding: 0.75rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #111;
-    background: linear-gradient(to right, #00eaff, #6f00ff);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    box-shadow: 0 0 10px #00eaff88;
-  }
-  
-  .AIButton:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px #00f0ffcc;
-  }
-  
-  .AIButton:disabled {
-    background-color: #444;
-    color: #999;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  
-  .AIOutput {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    width: 90%;
-    max-width: 700px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 12px;
-    border: 2px solid #7f00ff;
-    backdrop-filter: blur(10px);
-    color: #c0f5ff;
-    font-size: 1rem;
-    line-height: 1.6;
-    box-shadow: 0 0 30px #aa00ff55;
-    text-shadow: 0 0 4px #7f00ff;
-    word-wrap: break-word;
-  }
-  
-  .AIOutput h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-    color: #ffffff;
-    text-shadow: 0 0 6px #ff00ff;
-  }
-  
+  /* Use modern system-friendly fonts */
+.AIPage {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 10;
+  color: #1a1a1a;
+  min-height: calc(100vh - 60px);
+}
+
+/* Heading style */
+.AIPage h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+/* Textarea (Prompt Input) */
+.AIInput {
+  width: 100%;
+  max-width: 600px;
+  min-height: 120px;
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+.AIInput:focus {
+  border-color: #448aff;
+  box-shadow: 0 0 0 3px rgba(68, 138, 255, 0.2);
+  outline: none;
+}
+
+/* Send Button */
+.AIButton {
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: linear-gradient(135deg, #448aff, #82b1ff);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(68, 138, 255, 0.25);
+}
+
+.AIButton:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #2979ff, #82b1ff);
+}
+
+/* Output Card */
+.AIOutput {
+  width: 100%;
+  max-width: 600px;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ddd;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+  color: #1a1a1a;
+}
+
+.AIOutput h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.AIOutput p {
+  font-size: 1rem;
+  margin: 0;
+  color: #444;
+}
+
   
   :root {
     --color-bg1: rgb(108, 0, 162);
