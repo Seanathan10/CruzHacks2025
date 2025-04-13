@@ -7,7 +7,7 @@ export function TopBar() {
     const location = useLocation();
     const isInsights = location.pathname.includes("insights");
 
-    const topBarButtons = ['ucsc.info', 'news', 'peak', 'menu', 'courses', 'insights'];
+    const topBarButtons = ['insights', 'news', 'menu', 'courses'];
     
     return (
         <header className={`app-bar ${isInsights ? 'glass-topbar' : ''}`}>

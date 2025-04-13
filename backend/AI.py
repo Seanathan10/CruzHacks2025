@@ -45,4 +45,5 @@ async def generate_dh_summaries(request: DiningSummaryRequest):
 
         return {"text": response.text}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Gemini generation failed: {str(e)}")
+        return {"text": f"Gemini generation failed: {str(e)}"}
+        # raise HTTPException(status_code=500, detail=f"Gemini generation failed: {str(e)}")
