@@ -39,6 +39,7 @@ export default function Courses() {
 	const [selectedCourseID, setSelectedCourseID] = useState<number>(0);
 	const [detailedData, setDetailedData] = useState<any>(null);
 	const [selectedClassModality, setSelectedClassModality] = useState<string>("");
+	const [selectedClassLink, setSelectedClassLink] = useState<string>("");
 	const [inputData, setInputData] = useState<{ dept: string; catalogNum: string }>({ dept: "", catalogNum: "" });
 
 	//filter states
@@ -65,9 +66,9 @@ export default function Courses() {
 	}
 
 
-	useEffect(() => {
-		fetchCourses();
-	}, []);
+	// useEffect(() => {
+	// 	fetchCourses();
+	// }, []);
 
 	// useEffect(() => {
 	// 	getDetailedView()//.then(() => { console.log(detailedData) });
@@ -195,14 +196,21 @@ export default function Courses() {
 									enrollment={course.enrolled}
 									term={term} //temp
 									classID={course.class_number}
-									onCardClick={(classTerm: string, classID: string) => { setSelectedClassModality(course.modality); getDetailedView(classTerm, classID); }}
+									onCardClick={(classTerm: string, classID: string) => {setSelectedClassLink("https://pisa.ucsc.edu/class_search/" + course.link);  setSelectedClassModality(course.modality); getDetailedView(classTerm, classID); }}
 								/>
 							))
 						}
 					</div>
 				</div>
 				<div className="contentRight">
-					{detailedData && <DetailedView details={detailedData} modality={selectedClassModality} />}
+					{detailedData ? <DetailedView details={detailedData} modality={selectedClassModality} link={selectedClassLink} /> :
+						<>
+							{/* <div style={{height: '0px', margin: '20px 0'}}></div> */}
+							<div style={{ backgroundColor: '#2a2a2a', width: '100%', height: '100%' }}>
+
+							</div>
+						</>
+					}
 				</div>
 			</div>
 		</div>

@@ -1,10 +1,12 @@
 import React from "react"
 import './DetailedView.css';
 import { statusEmoji } from './Card.tsx';
+import ExternalLinkIcon from './external-link.svg';
 
 interface DetailedViewProps {
     details: string,
-    modality: string
+    modality: string,
+    link: string
 }
 
 function classDetailsGridEntry(title: string, content: string) {
@@ -16,7 +18,7 @@ function classDetailsGridEntry(title: string, content: string) {
     )
 }
 
-const DetailedView: React.FC<DetailedViewProps> = ({ details, modality }) => {
+const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link }) => {
     const detailsObj = JSON.parse(details);
     const spacer = (<div style={{height: '0px', margin: '20px 0'}}></div>)
 
@@ -24,8 +26,24 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality }) => {
         <div className="parent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'left' }}>
             {spacer}
 
-            <div>
-                <h3>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+                <div>
+                    <h3>{detailsObj.primary_section.subject}-{detailsObj.primary_section.catalog_nbr}: {detailsObj.primary_section.title_long}</h3>
+                </div>
+                <button 
+                    onClick={() => window.open(link, '_blank')}
+                    style={{ 
+                        padding: '8px 8px', 
+                        backgroundColor: '#4CAF50', 
+                        borderRadius: '4px', 
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                    }}
+                >
+                    <img src={ExternalLinkIcon} alt="View in Pisa" width="20px" height="20px" style={{ verticalAlign: 'middle' }} />
+                </button>
             </div>
 
 
