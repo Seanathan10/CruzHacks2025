@@ -11,6 +11,7 @@ import {Location} from "./api";
 import './Menu.css'
 import {MenuPanel} from "./MenuPanel";
 import '../Loading.css';
+import {Error, Loading} from "../Loading";
 
 export default function MenuPage() {
     const contextValues = useContext(Context);
@@ -35,16 +36,7 @@ export default function MenuPage() {
         <>
             {contextValues?.mobile ? (<MobileTopBar />) : (<DesktopTopBar />)}
             <DateHeader>Wednesday, January 6, 2021</DateHeader>
-            {loading ? (
-                <div className="loading">
-                    <div className="loading-spinner"></div>
-                    <div className="loading-text">Loading...</div>
-                </div>
-            ) : error ? (
-                <div className="loading">
-                    <div className="loading-text">Error loading menu</div>
-                </div>
-            ) : (
+            {loading ? <Loading/> : error ? <Error/> : (
             <div style={{width: '100vw', height: '100vh', overflow: 'scroll', position: 'fixed', left: '0px', top: '30px'}}>
                 <div className="MenuPanelDelay"
                 style={{ "--delay": `${1 * 115}ms` } as React.CSSProperties}

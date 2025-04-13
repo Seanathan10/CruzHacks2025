@@ -46,10 +46,7 @@ def fetch_website_html(url: str, locationNum: str, meal: str = '', day_offset = 
 
         date_str = date_str.replace('/', '%2F')
         full_url += f'&dtdate={date_str}'
-        
-        # url += f'&dtdate={date_str}'
 
-    print(full_url)
     cookies = {
         'WebInaCartLocation': locationNum,
         'WebInaCartDates': '',
@@ -104,10 +101,3 @@ def get_short_menu(locationNum: str, day_offset: int = 0) -> str:
 
         menu[meal_name] = food_items
     return menu
-
-if __name__ == '__main__':
-    location = Location.CowellStevenson
-    print(get_short_menu(location.value, 0))
-    print()
-    print()
-    print(get_short_menu(location.value, 1))
