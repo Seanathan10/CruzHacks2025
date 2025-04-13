@@ -57,8 +57,10 @@ const Card: React.FC<CardProps> = ({ classStatus, className, instructor, locatio
         <div className="cardParent" onClick={() => { onCardClick(term, classID) }}>
             <div className="card">
                 <div className="classInfo">
-                    <div style={{alignContent: "left", display: "flex"}}>
-                        <p style={{ margin: '-2px 0' }}><span style={{ fontWeight: '600' }}>{statusEmoji(classStatus)} {className}</span></p>
+                    <div style={{display: "flex", width: "100%"}}>
+                        <p style={{ margin: '-2px 0', textAlign: "left", width: "100%", overflowWrap: "break-word" }}>
+                            <span style={{ fontWeight: '600' }}>{statusEmoji(classStatus)} {className}</span>
+                        </p>
                     </div>
                     {document.documentElement.getAttribute('data-theme') === 'dark' ? (
                         <>
