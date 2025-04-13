@@ -56,9 +56,22 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .NewsCard {
+    display: none;
+  }
+}
+
 .NewsCard {
   position: fixed;
   left: 2.5%;
   bottom: 2.5%;
   z-index: 1000;
+}
+
+@media (min-width: 1024px) {
+  .Mobile-DiningInsights {
+    display: none;
+  }
+  
 }

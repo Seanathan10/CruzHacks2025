@@ -334,6 +334,10 @@ const AIComponent: React.FC = () => {
             {loading ? "..." : "Send"}
           </button>
         </div>
+
+        <div className="Mobile-DiningInsights">
+          <DiningInsights />
+        </div>
       </div>
     </>
   );

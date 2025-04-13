@@ -51,6 +51,7 @@ html, body {
   font-family: 'Inter', 'Helvetica Neue', sans-serif;
   color: #1a1a1a;
   position: relative;
+  overflow: scroll;
 }
 
 @supports (padding: env(safe-area-inset-top)) {
@@ -357,13 +358,15 @@ html, body {
   }
 }
 
+@media (max-width: 1024px) {
+  .dashboard-scatter-container {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     --circle-size: 100%;
-  }
-
-  .dashboard-scatter-container {
-    display: none;
   }
   
   .chat-bubble {
