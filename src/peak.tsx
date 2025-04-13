@@ -3,8 +3,6 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-import AIComponent from "./AI/AI.tsx";
-
 import { TopBar as MobileTopBar } from "./dashboard/mobile/TopBar.tsx";
 import { TopBar as DesktopTopBar } from "./dashboard/desktop/TopBar.tsx";
 

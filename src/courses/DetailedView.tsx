@@ -27,7 +27,7 @@ const DetailedView: React.FC<DetailedViewProps> = ({ details, modality, link, is
 
     const containerStyle = isMobile ? {
         maxHeight: '100vh',
-        overflowY: 'auto',
+        overflowY: 'auto' as const,
         width: '100%',
         padding: '0 10px'
     } : {};

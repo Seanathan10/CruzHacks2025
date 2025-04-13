@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react"
-import { Context } from "../../Context.tsx";
 import {MenuPanel} from "../MenuPanel.tsx";
 import {type Menu} from "../api.ts";
 

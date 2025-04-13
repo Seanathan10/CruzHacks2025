@@ -9,7 +9,7 @@ interface FilterProps {
 }
 
 
-export default function Filters({ isMobile, selectedTerm, setTerm, setGE, setStatus, setTimes }: FilterProps) {
+export default function Filters({ selectedTerm, setTerm, setGE, setStatus, setTimes }: FilterProps) {
 
 
     return (

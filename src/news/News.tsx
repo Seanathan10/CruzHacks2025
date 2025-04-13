@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { TopBar as MobileTopBar } from "../dashboard/mobile/TopBar";
 import { TopBar as DesktopTopBar } from "../dashboard/desktop/TopBar";
 import "./News.css";
-import {Error, Loading} from "../Loading";
+import {Error} from "../Loading";
 
 type FeedItem = {
   title: string;

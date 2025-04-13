@@ -6,7 +6,6 @@ import DetailedView from "./DetailedView";
 import Search from './Search.tsx';
 import './Courses.css';
 import Filters from "./Filters.tsx";
-import { useIsFirstRender } from "@mantine/hooks";
 
 const useMediaQuery = (query: string) => {
 	const [matches, setMatches] = useState(window.matchMedia(query).matches);

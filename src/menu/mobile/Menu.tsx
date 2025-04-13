@@ -1,9 +1,11 @@
 import { useContext } from "react"
 import { Context } from "../../Context.tsx";
-import DateHeader from "../DateHeader.tsx";
+
 import MealHeader from "../MealHeader.tsx";
 import FoodBlock from "../FoodBlock.tsx";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// @ts-expect-error gekrnhiowu
 import 'swiper/css';
 
 const foodList: any = {display: 'flex', gap: "5px", flexWrap: 'wrap', justifyContent: 'center'};

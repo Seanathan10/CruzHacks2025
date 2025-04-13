@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAllLocationMenus, type Menu, Location } from './api';
+import { getAllLocationMenus, type Menu } from './api';
 
 interface SummaryResponse {
   text: string;
