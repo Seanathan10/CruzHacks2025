@@ -12,6 +12,11 @@
     align-items: center;
 }
 
+.search-wrapper {
+    width: 83%;
+    /* align-items: center; */
+    padding-right: 23px;
+}
 .courseList {
     flex: 1;
     overflow-y: auto;
@@ -19,11 +24,6 @@
     width: 100%;
 }
 
-.search-wrapper {
-    width: 83%;
-    /* align-items: center; */
-    padding-right: 23px;
-}
 
 .courses-container {
     display: flex;

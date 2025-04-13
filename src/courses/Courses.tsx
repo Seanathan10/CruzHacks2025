@@ -6,6 +6,7 @@ import DetailedView from "./DetailedView";
 import Search from './Search.tsx';
 import './Courses.css';
 import Filters from "./Filters.tsx";
+import { useIsFirstRender } from "@mantine/hooks";
 
 const useMediaQuery = (query: string) => {
 	const [matches, setMatches] = useState(window.matchMedia(query).matches);
@@ -48,6 +49,7 @@ export default function Courses() {
 	const [selectedClassLink, setSelectedClassLink] = useState<string>("");
 	const [inputData, setInputData] = useState<{ dept: string; catalogNum: string }>({ dept: "", catalogNum: "" });
 	const [showDetails, setShowDetails] = useState(false);
+	const [isFirstLoad, setFirstLoad] = useState<boolean>(true)
 
 	//filter states
 	const [term, setTerm] = useState<string>("2252");
@@ -79,6 +81,8 @@ export default function Courses() {
 	}
 
 	const onSearch = (query: string) => {
+		if (isFirstLoad) setFirstLoad(false);
+		
 		setInputData(parseInput(query));
 	}
 
@@ -114,7 +118,8 @@ export default function Courses() {
 						<Filters isMobile={isMobile} selectedTerm={term} setTerm={setTerm} setGE={setGE} setTimes={setTimes} setStatus={setStatus} />
 					</div>
 					<div className="courseList" style={{ marginTop: isMobile ? '20px' : '50px' }}>
-						{loading ? <p>Loading courses...</p> :
+						{isFirstLoad ? <p>Search for a course to get started</p> :
+						loading ? <p>Loading courses...</p> :
 							courseData.map((course: any, index: number) => (
 								<Card
 									key={index}
