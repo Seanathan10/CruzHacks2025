@@ -4,7 +4,7 @@ import Dashboard from './dashboard/Dashboard';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import RssFeed from './news/News.tsx';
 import Peak from './peak';
-import Menu from './menu/MenuPage.tsx';
+import MenuPage from './menu/MenuPage.tsx';
 import {Context} from './Context.tsx';
 
 import Courses from './courses/Courses.tsx';
@@ -28,7 +28,7 @@ function App() {
           <Route path='/news' element={<RssFeed />} />
           <Route path='/peak' element={<Peak />} />
           <Route path='/courses' element={<Courses />} />
-          <Route path='/menu' element={<Menu />} />
+          <Route path='/menu' element={<MenuPage />} />
           <Route path='/insights' element={<AIComponent />} />
         </Routes>
       </BrowserRouter>
