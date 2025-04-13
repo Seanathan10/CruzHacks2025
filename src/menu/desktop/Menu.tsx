@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react"
+// import { useState, useEffect, useRef } from "react"
 import {MenuPanel} from "../MenuPanel.tsx";
 import {type Menu} from "../api.ts";
 
 export function Menu({children}: {children: Record<string, Menu>}) {
-    const [desktopMenuHeight, setDesktopMenuHeight] = useState(0);
-    const measureRef = useRef<HTMLDivElement>(null);
+    // const [desktopMenuHeight, setDesktopMenuHeight] = useState(0);
+    // const measureRef = useRef<HTMLDivElement>(null);
 
     // useEffect(() => {
     //     const updateScroll = () => {
