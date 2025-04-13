@@ -12,32 +12,32 @@ interface MenuPanelProps {
 export function MenuPanel(props: MenuPanelProps) {
     const locationMenus = Object.entries(props.menu)
     return (
-        <div className={'menuPanel'} style={{width: props.width ?? '100%', marginLeft: 0,
+        <div style={{width: props.width ?? '100%', marginLeft: 0,
             padding: 0, borderRadius: 10, boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-            display: 'flex', marginTop: 100, flexDirection: 'column', overflowY: 'scroll',
+            display: 'flex', flexDirection: 'column',
             minWidth: '400px'}}>
         <div style={{fontSize: 30, fontWeight: 'bold', margin: 0, padding: 20}}>{props.name}</div>
         {locationMenus.length > 0 ? locationMenus.map(([mealName, meal]) => (
-            (meal && Object.keys(meal).length > 0) ? <>
+            (meal && Object.keys(meal).length > 0) ? <div key={mealName}>
                 <div>
                     <MealHeader key={mealName}>{mealName}</MealHeader>
                 </div>
                 <div>
                     {Object.entries(meal).map(([groupName, foodGroup]) => (
-                        <>
-                        <p className="groupName" style={{display: 'flex',
-                            fontSize: 15, marginBottom: 5, fontWeight: 'bold',
-                            marginLeft: 20, marginTop: 2.5, justifyContent: 'flex-start'}}>{groupName}</p>
-                        <div style={{display: 'flex', flexWrap: 'wrap',
-                            gap: 0}}>
-                            {Object.entries(foodGroup).map(([foodName, foodItem]) => (
-                                <FoodBlock key={foodName}>{foodItem}</FoodBlock>
-                            ))}
+                        <div key={groupName}>
+                            <p className="groupName" style={{display: 'flex',
+                                fontSize: 15, marginBottom: 5, fontWeight: 'bold',
+                                marginLeft: 20, marginTop: 2.5, justifyContent: 'flex-start'}}>{groupName}</p>
+                            <div style={{display: 'flex', flexWrap: 'wrap',
+                                gap: 0}}>
+                                {Object.entries(foodGroup).map(([foodName, foodItem]) => (
+                                    <FoodBlock key={foodName}>{foodItem}</FoodBlock>
+                                ))}
+                            </div>
                         </div>
-                        </>
                     ))}
                 </div>
-            </> : null
+            </div> : null
         )) : null}
         </div>
     )

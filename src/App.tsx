@@ -16,12 +16,15 @@ import AIComponent from './AI/AI.tsx';
 function App() {
   const [mobile, setMobile] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [desktopMenuHeight, setDesktopMenuHeight] = useState(0);
   useEffect(() => {
     setMobile(window.innerWidth < 600);
   }, []);
   // const contextValues = {mobile: useMediaQuery('(max-width: 600px)')};
   return (
-    <Context.Provider value={{mobile: mobile, drawer: drawerOpen, drawerFunction: setDrawerOpen}}>
+    <Context.Provider value={{mobile: mobile, drawer: drawerOpen, drawerFunction: setDrawerOpen,
+      desktopMenuHeight: desktopMenuHeight, setDesktopMenuHeight: setDesktopMenuHeight
+    }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Dashboard />} />
