@@ -6,8 +6,8 @@ import DetailedView from "./DetailedView";
 import Search from './Search.tsx';
 import './Courses.css';
 import Filters from "./Filters.tsx";
+import { useIsFirstRender } from "@mantine/hooks";
 
-// Add useMediaQuery hook
 const useMediaQuery = (query: string) => {
 	const [matches, setMatches] = useState(window.matchMedia(query).matches);
 
@@ -49,6 +49,7 @@ export default function Courses() {
 	const [selectedClassLink, setSelectedClassLink] = useState<string>("");
 	const [inputData, setInputData] = useState<{ dept: string; catalogNum: string }>({ dept: "", catalogNum: "" });
 	const [showDetails, setShowDetails] = useState(false);
+	const [isFirstLoad, setFirstLoad] = useState<boolean>(true)
 
 	//filter states
 	const [term, setTerm] = useState<string>("2252");
@@ -56,8 +57,6 @@ export default function Courses() {
 	const [status, setStatus] = useState<string>("all");
 	const [time, setTimes] = useState<string>("");
 
-	// Rest of your existing functions...
-	
 	async function fetchCourses() {
 		try {
 			setLoading(true);
@@ -82,6 +81,8 @@ export default function Courses() {
 	}
 
 	const onSearch = (query: string) => {
+		if (isFirstLoad) setFirstLoad(false);
+		
 		setInputData(parseInput(query));
 	}
 
@@ -96,23 +97,29 @@ export default function Courses() {
 			<div className="topbar-container">
 				{isMobile ? <MobileTopBar /> : <DesktopTopBar />}
 			</div>
-			<div className="parent" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+			<div className="parent" style={{ flexDirection: isMobile ? 'column' : 'row', justifyContent: 'center' }}>
 				<div 
 					className="contentLeft" 
 					style={{ 
 						width: isMobile ? '100%' : '30%', 
-						display: isMobile && showDetails ? 'none' : 'flex' 
+						display: isMobile && showDetails ? 'none' : 'flex',
+						padding: isMobile ? '10px 0' : '10px'
 					}}
 				>
 					{spacer}
 
-					<div className="search-wrapper" style={{ width: isMobile ? '95%' : '83%' }}>
+					<div className="search-wrapper" style={{ 
+						width: isMobile ? '90%' : '83%',
+						boxSizing: 'border-box',
+						paddingRight: isMobile ? '0' : '23px',
+						maxWidth: '100%'
+					}}>
 						<Search onSearchBoxInput={onSearch} onGoButtonPressed={fetchCourses} />
 						<Filters isMobile={isMobile} selectedTerm={term} setTerm={setTerm} setGE={setGE} setTimes={setTimes} setStatus={setStatus} />
-
 					</div>
 					<div className="courseList" style={{ marginTop: isMobile ? '20px' : '50px' }}>
-						{loading ? <p>Loading courses...</p> :
+						{isFirstLoad ? <p>Search for a course to get started</p> :
+						loading ? <p>Loading courses...</p> :
 							courseData.map((course: any, index: number) => (
 								<Card
 									key={index}

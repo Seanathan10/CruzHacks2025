@@ -6,17 +6,10 @@
 .contentLeft {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    /* width: 30%; */
     height: calc(100vh - 60px);
     padding: 10px;
     align-items: center;
-}
-
-.courseList {
-    flex: 1;
-    overflow-y: auto;
-    margin-top: 50px;
-    width: 100%;
 }
 
 .search-wrapper {
@@ -24,6 +17,13 @@
     /* align-items: center; */
     padding-right: 23px;
 }
+.courseList {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 50px;
+    width: 100%;
+}
+
 
 .courses-container {
     display: flex;

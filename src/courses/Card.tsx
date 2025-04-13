@@ -66,7 +66,7 @@ const Card: React.FC<CardProps> = ({ classStatus, className, instructor, locatio
                         <>
                             <Icon svg={SinglePersonIconDarkMode} data={instructor} />
                             <Icon svg={MapIconDarkMode} data={location} />
-                            <Icon svg={ClockIconDarkMode} data={time} />
+                            {time && <Icon svg={ClockIconDarkMode} data={time} />}
                             <Icon svg={MultiplePeopleIconDarkMode} data={enrollment} />
                             {summerSession && <Icon svg={SunIconDarkMode} data={summerSession} />}
                         </>
@@ -74,7 +74,7 @@ const Card: React.FC<CardProps> = ({ classStatus, className, instructor, locatio
                         <>
                             <Icon svg={SinglePersonIconLightMode} data={instructor} />
                             <Icon svg={MapIconLightMode} data={location} />
-                            <Icon svg={ClockIconLightMode} data={time} />
+                            {time && <Icon svg={ClockIconLightMode} data={time} />}
                             <Icon svg={MultiplePeopleIconLightMode} data={enrollment} />
                             {summerSession && <Icon svg={SunIconLightMode} data={summerSession} />}
                         </>
