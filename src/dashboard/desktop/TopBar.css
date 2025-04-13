@@ -34,3 +34,18 @@
     /* width: 250px; */
   }
   
+  .glass-topbar {
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+[data-theme="light"] .glass-topbar {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .glass-topbar {
+  background-color: rgba(30, 30, 30, 0.4);
+}

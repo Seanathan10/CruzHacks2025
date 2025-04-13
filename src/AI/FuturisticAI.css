@@ -6,18 +6,24 @@ html, body {
 
 
   /* Use modern system-friendly fonts */
-.AIPage {
-  font-family: 'Inter', 'Helvetica Neue', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 1rem;
-  gap: 1.5rem;
-  position: relative;
-  z-index: 10;
-  color: #1a1a1a;
-  min-height: calc(100vh - 60px);
-}
+  .AIPage {
+    position: relative;
+    z-index: 10;
+  
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    padding: 2rem;
+    gap: 1.5rem;
+  
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    color: #1a1a1a;
+  }
+  
 
 /* Heading style */
 .AIPage h1 {
