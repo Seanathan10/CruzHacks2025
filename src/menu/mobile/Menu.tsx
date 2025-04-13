@@ -10,8 +10,8 @@ const foodList: any = {display: 'flex', gap: "5px", flexWrap: 'wrap', justifyCon
 
 export function Menu({children}: {children: any}) {
     const contextValues = useContext(Context);
-    const menuArray = Object.entries(children);
-    console.log('child entries', menuArray);
+    // const menuArray = Object.entries(children);
+    // console.log('child entries', menuArray);
     return (
         <>
             <Swiper slidesPerView={1} spaceBetween={0}
@@ -19,7 +19,7 @@ export function Menu({children}: {children: any}) {
                 style={{top: '100px'}}
             >
                 <SwiperSlide key='Crown/Merrill'>
-                    {menuArray.map((meal: any) =>
+                    {children.map((meal: any) =>
                         <div key={meal[0]}>
                         <MealHeader>{meal[0]}</MealHeader>
                         {Object.entries(meal[1]).map((subcategory: any) => 

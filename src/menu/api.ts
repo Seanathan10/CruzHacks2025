@@ -38,20 +38,34 @@ export async function getMenu(location: string, day_offset: number = 0): Promise
     if (!result) {
         return {};
     }
+
     
-    const data = await result.json();
-    return data;
+    const data: Menu = await result.json();
+
+    const menu: Menu = {}
+    for (const [mealName, meal] of Object.entries(data)) {
+        if (meal && Object.values(meal).length > 0) {
+            menu[mealName] = meal;
+        } else {
+            console.warn('Empty meal:', mealName + ' for location: ' + location);
+        }
+    }
+    return menu;
 }
 
 export async function getAllLocationMenus(day_offset: number = 0): Promise<Record<string, Menu>> {
     const locationMenus: Record<string, Menu> = {};
     for (const location of Object.values(Location)) {
         const menu = await getMenu(location, day_offset);
-        locationMenus[location] = menu;
+        if (menu && Object.keys(menu).length > 0) {
+            locationMenus[location] = menu;
+        } else {
+            console.warn('Empty menu for location:', location);
+        }
     }
     return locationMenus;
 }
 
-console.log(await getAllLocationMenus(0));
+// (await getAllLocationMenus(0));
 
-console.log(await getMenu(Location.CowellStevenson, 0));
+// console.log(await getMenu(Location.CowellStevenson, 0));

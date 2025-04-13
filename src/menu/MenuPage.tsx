@@ -6,16 +6,17 @@ import { Context } from "../Context";
 import {Menu as MobileMenu} from './mobile/Menu';
 import {Menu as DesktopMenu} from './desktop/Menu';
 import DateHeader from "./DateHeader";
-import {getMenu} from "./api";
+import {getAllLocationMenus, type Menu} from "./api";
 import {Location} from "./api";
 import './Menu.css'
+import {MenuPanel} from "./MenuPanel";
 
-export default function Menu() {
+export default function MenuPage() {
     const contextValues = useContext(Context);
-    const [menuData, setMenuData] = useState({});
+    const [menuData, setMenuData] = useState<Record<string, Menu>>({});
     useEffect(() => {
         (async () => {
-            const menu = await getMenu(Location.CowellStevenson, 0);
+            const menu = await getAllLocationMenus(0);
 
             if (!menu) {
                 return;
@@ -23,13 +24,6 @@ export default function Menu() {
             console.log('response:', menu, typeof menu, JSON.stringify(menu));
             setMenuData(menu);
         })()
-        // fetch('http://127.0.0.1:8000/menu?location=Cowell/Stevenson')
-        //     .then((response) => response.json())
-        //     .then((result) => {
-        //         console.log('RESULT', result);
-        //         setMenuData(result);
-        //     })
-        //     .catch((error) => console.log('failed to fetch and set menu data:', error))
     }, [])
     return (
         <>
@@ -41,7 +35,8 @@ export default function Menu() {
               className="MenuPanelDelay"
               style={{ "--delay": `${1 * 115}ms` } as React.CSSProperties}
             >
-                {contextValues?.mobile ? (<MobileMenu>{menuData}</MobileMenu>) : (<DesktopMenu>{menuData}</DesktopMenu>)}
+
+                {contextValues?.mobile ? (<MobileMenu>{menuData[Location.CowellStevenson]}</MobileMenu>) : (<DesktopMenu>{menuData}</DesktopMenu>)}
             </div>
             </div>
         </>
