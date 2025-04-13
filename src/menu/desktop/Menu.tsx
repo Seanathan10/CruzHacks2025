@@ -9,11 +9,13 @@ export function Menu({children}: {children: Record<string, Menu>}) {
     const contextValues = useContext(Context);
     
     return (
-        <div style={{display: 'flex', flexDirection: 'row', gap: '0px'}}>
-            {Object.entries(children).map(([location, menu]: [string, Menu]) => (
-                <>
+        <div style={{display: 'flex', flexDirection: 'row', gap: 12.5, marginLeft: '0.5%'}}>
+            {Object.entries(children).map(([location, menu]: [string, Menu], i: number) => (
+                // <>
+                <div key={location} style={{display: 'flex', overflowY  : 'visible', "--delay": `${i * 150}ms` } as React.CSSProperties}>
                     <MenuPanel key={location} name={location} menu={menu} width="100%"></MenuPanel>
-                </>
+                </div>
+                // </>  
             ))}
         </div>
     )

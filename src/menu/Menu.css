@@ -1,11 +1,11 @@
-
+/* 
 .menuPanel {
     background-color: var(--card-bg);
     transition: 0.5s ease-in-out;
     &:hover {
         transform: translateX(100);
     }
-}
+} */
 
 /* .MenuPanelDelay {
     top: '100%';
@@ -18,13 +18,49 @@
 .foodBlock {
     background-color: var(--card-bg);
     color: var(--text-color);
-    transition: 0.5s ease-in-out;
     &:hover {
+        transition: 0.5s ease-in-out;
         background-color: var(--bg-color);
     }
 }
 
-/* .groupName {
-    background-color: var(--bg-color);
+.mealName {
     color: var(--text-color);
-} */
+}
+
+.groupName {
+    /* background-color: var(--bg-color); */
+    color: var(--link-color);
+}
+
+.menuPanel {
+	background-color: var(--card-bg);
+	padding: 1.25rem 1.5rem;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	transition: box-shadow 0.3s ease, transform 0.3s ease, border 0.3s ease;
+	opacity: 0;
+	transform: translateY(0) scale(1);
+	border: 1px solid transparent;
+	will-change: transform, box-shadow, border;
+	animation: fadeInUp 1s ease forwards;
+	animation-delay: var(--delay, 0s);
+}
+
+.menuPanel:hover {
+    transform: translateY(4px) scale(1.02);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+	border: 1px solid var(--link-hover);
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
