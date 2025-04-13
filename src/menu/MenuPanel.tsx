@@ -10,7 +10,9 @@ interface MenuPanelProps {
 }
 
 export function MenuPanel(props: MenuPanelProps) {
-    const locationMenus = Object.entries(props.menu)
+    const locationMenus = Object.entries(props.menu).filter(
+        ([_, meal]) => Object.keys(meal).length > 0 // Only include non-empty meals
+      );
     return (
         <div className={'menuPanel'} style={{width: props.width ?? '100%', marginLeft: 0,
             padding: 0, borderRadius: 10, boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',

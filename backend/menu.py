@@ -92,6 +92,14 @@ def calculate_date(day_offset: int) -> str:
     date_str = date.strftime('%m/%d/%Y')
     return date_str
 
+def get_all_menus(day_offset: int = 0) -> str:
+    menus = {}
+    for location in LOCATION_MAP:
+        locationNum = LOCATION_MAP[location].value
+        menu = get_short_menu(locationNum, day_offset)
+        menus[location] = menu
+    return menus
+
 def get_short_menu(locationNum: str, day_offset: int = 0) -> str:
     url = BASE_URL + SHORTMENU_URL
 

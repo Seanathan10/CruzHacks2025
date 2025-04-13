@@ -31,12 +31,12 @@ export default function MenuPage() {
             setMenuData(menu);
             setLoading(false);
         })()
-    }, [])
+    }, []);
     return (
         <>
             {contextValues?.mobile ? (<MobileTopBar />) : (<DesktopTopBar />)}
             <DateHeader>Wednesday, January 6, 2021</DateHeader>
-            {loading ? <Loading/> : error ? <Error/> : (
+            {loading ? <Loading/> : error ? <Error>Menu Failed to Load</Error> : (
             <div style={{width: '100vw', height: '100vh', overflow: 'scroll', position: 'fixed', left: '0px', top: '30px'}}>
                 <div className="MenuPanelDelay"
                 style={{ "--delay": `${1 * 115}ms` } as React.CSSProperties}
