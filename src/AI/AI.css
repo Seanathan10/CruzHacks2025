@@ -1,64 +1,62 @@
-
 .AIPage {
-    padding: 2rem;
-    font-family: var(--font-family);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    min-height: calc(100vh - 200px);
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .AIPage h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .AIInput {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    resize: vertical;
-    min-height: 120px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .AIButton {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--primary-color);
-    color: white;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .AIButton:hover {
-    background-color: var(--primary-hover);
-  }
-  
-  .AIButton:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-  }
-  
-  .AIOutput {
-    margin-top: 2rem;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .AIOutput h3 {
-    margin-top: 0;
-  }
-  
+  padding: clamp(1rem, 5vw, 2rem);
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.AIPage h1 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin-bottom: 1rem;
+}
+
+.AIInput {
+  width: 100%;
+  padding: clamp(0.5rem, 3vw, 1rem);
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  resize: vertical;
+  min-height: 120px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.AIButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.AIButton:hover {
+  background-color: var(--primary-hover);
+}
+
+.AIButton:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.AIOutput {
+  margin-top: clamp(1rem, 4vw, 2rem);
+  padding: clamp(0.75rem, 3vw, 1rem);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.AIOutput h3 {
+  margin-top: 0;
+}

@@ -39,14 +39,14 @@ html, body {
 }
 
 .AIPage {
-  z-index: 10;
+  z-index: 7;
   min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-lg) var(--spacing-md);
+  /* padding: var(--spacing-lg) var(--spacing-md); */
   gap: var(--spacing-md);
   font-family: 'Inter', 'Helvetica Neue', sans-serif;
   color: #1a1a1a;
@@ -256,9 +256,11 @@ html, body {
   display: grid;
   position: fixed;
   bottom: 25%;
-  left: 5%;
-  max-width: 100%;
+  left: 2.5%;
+  gap: 1rem;
+  /* max-width: 100%; */
 }
+
 
 .AIInput {
   width: 100%;
@@ -358,6 +360,10 @@ html, body {
 @media (max-width: 768px) {
   :root {
     --circle-size: 100%;
+  }
+
+  .dashboard-scatter-container {
+    display: none;
   }
   
   .chat-bubble {

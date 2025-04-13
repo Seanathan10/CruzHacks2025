@@ -1,5 +1,5 @@
 import React from 'react';
-import './UCSCCard.css';
+import './AI-InterestCard.css';
 
 interface Props {
   title: string;

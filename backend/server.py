@@ -2,7 +2,9 @@ from fastapi import FastAPI, Request, HTTPException
 from . import scraper
 import urllib.parse
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from backend import news, AI
+from typing import Optional
 from . import menu
 # from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
@@ -15,6 +17,8 @@ api.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 
 @api.get("/courses")
 async def getAllCourses(
