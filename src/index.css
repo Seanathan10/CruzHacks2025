@@ -3,6 +3,18 @@
   background-color: var(--bg-color);
 } */
 
+html, body {
+  font-family: 'Dongle', sans-serif;
+  margin-top: 0;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
+  env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+}
+
+:root {
+  --safe-area-max-inset-bottom: env(safe-area-max-inset-bottom, 36px);
+  --bottom-bar-height: 0px;
+}
+
 /* body {
   margin: 0;
   padding-top: 50px;

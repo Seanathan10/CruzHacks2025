@@ -1,8 +1,19 @@
 html, body {
     font-family: 'Dongle', sans-serif;
     margin-top: 0;
-    padding: 0;
+    padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
+    env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
   }
+
+  @supports (padding: env(safe-area-inset-top)) {
+    .AIPage {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+  }
+  
 
   .insights-header {
     font-size: 2rem;
@@ -201,6 +212,7 @@ html, body {
   .gradient-bg {
     position: fixed;
     top: 0;
+    inset: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
