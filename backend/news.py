@@ -6,7 +6,7 @@ from fastapi import FastAPI, Request, HTTPException
 import urllib.parse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from backend import news, AI
+import news, AI
 from typing import Optional
 # from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime

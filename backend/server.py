@@ -1,13 +1,14 @@
 from fastapi import FastAPI, Request, HTTPException
-from . import scraper
+import scraper
 import urllib.parse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from backend import news, AI
+import news, AI
 from typing import Optional
-from . import menu
+import menu
 # from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
+import uvicorn
 
 api: FastAPI = FastAPI()
 api.add_middleware(
@@ -65,3 +66,9 @@ async def get_all_menus(day_offset: int = 0):
     menus = menu.get_all_menus(day_offset)
     print("Time taken to get all menus:", datetime.now() - start_time)
     return menus
+
+if __name__ == '__main__':
+    uvicorn.run('pp')
+
+
+

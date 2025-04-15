@@ -1,3 +1,7 @@
+uvicorn
+beautifulsoup4
+fastapi[standard]
+requests
+feedparser
+google-generativeai
 
-
-bs4
