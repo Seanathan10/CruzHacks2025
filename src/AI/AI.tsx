@@ -57,7 +57,7 @@ const FEEDS = [
   },
 ];
 
-const API_URL = "http://api.ucsc.info/generate_content";
+const API_URL = "https://api.ucsc.info/generate_content";
 
 const AIComponent: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
@@ -161,7 +161,7 @@ const AIComponent: React.FC = () => {
         const activeFeeds = FEEDS.filter((f) => selectedFeeds.includes(f.key));
         const responses = await Promise.all(
           activeFeeds.map((feed) =>
-            fetch(`hhttp://api.ucsc.info${feed.url}`).then((res) => res.json())
+            fetch(`https://api.ucsc.info${feed.url}`).then((res) => res.json())
           )
         );
 

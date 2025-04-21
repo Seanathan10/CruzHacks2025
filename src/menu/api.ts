@@ -1,4 +1,4 @@
-const BASE_URL = 'http://api.ucsc.info'
+const BASE_URL = 'https://api.ucsc.info'
 
 export enum Location {
     CowellStevenson = 'Cowell/Stevenson',

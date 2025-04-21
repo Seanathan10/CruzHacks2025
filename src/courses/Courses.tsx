@@ -60,7 +60,7 @@ export default function Courses() {
 		try {
 			setLoading(true);
 			console.log("loading with", inputData)
-			const response = await fetch(`http://api.ucsc.info/courses?term=${term}&regStatus=all&department=${inputData.dept}&catalogNum=${inputData.catalogNum}&ge=${ge}&regStatus=${status}&meetingTimes=${time}`);
+			const response = await fetch(`https://api.ucsc.info/courses?term=${term}&regStatus=all&department=${inputData.dept}&catalogNum=${inputData.catalogNum}&ge=${ge}&regStatus=${status}&meetingTimes=${time}`);
 			const data = await response.json();
 			setCourseData(data);
 		} catch (error) {
