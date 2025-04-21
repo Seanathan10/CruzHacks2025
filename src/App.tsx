@@ -28,7 +28,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Dashboard />} />
-          <Route path='/news' element={<RssFeed />} />
+          <Route path='/news' element={<RssFeed />} />  
           <Route path='/peak' element={<Peak />} />
           <Route path='/courses' element={<Courses />} />
           <Route path='/menu' element={<MenuPage />} />

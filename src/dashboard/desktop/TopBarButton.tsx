@@ -1,15 +1,17 @@
 import { useNavigate } from "react-router";
+import {Link} from "react-router-dom";
 
 export default function TopBarButton({children}: {children: string}) {
     const navigate = useNavigate();
     return (
-        <a href='#' onClick={() => {
-            if (children === 'ucsc.info') {
-                navigate('/');
-            } else {
-                navigate(`/${children}`);
-            }
-        }}>{children}</a>
+        <Link to={`/${children}`} style={{textDecoration: 'none'}}>{children}</Link>
+        // <a href='.' onClick={() => {
+        //     if (children === 'ucsc.info') {
+        //         navigate('/');
+        //     } else {
+        //         navigate(`/${children}`);
+        //     }
+        // }}>{children}</a>
     );
 }
 

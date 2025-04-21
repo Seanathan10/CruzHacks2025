@@ -7,7 +7,8 @@ from typing import Optional
 
 router = APIRouter()
 
-genai.configure(api_key="AIzaSyC2Pc8QcmWyOPc9pi10WpejbfL3TR7HkHA")
+# genai.configure(api_key="AIzaSyC2Pc8QcmWyOPc9pi10WpejbfL3TR7HkHA")
+genai.configure(api_key="AIzaSyA_NivZi3nSI6bABu5WMOHKhNxQbY5BbbA")
 
 class PromptRequest(BaseModel):
     prompt: str
