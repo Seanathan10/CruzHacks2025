@@ -5,7 +5,7 @@ interface SummaryResponse {
   text: string;
 }
 
-const API_URL = "http://localhost:8000/generate_dh_summaries";
+const API_URL = "http://api.ucsc.info/generate_dh_summaries";
 
 export default function DiningInsights() {
   const [summaries, setSummaries] = useState<Record<string, string>>({});

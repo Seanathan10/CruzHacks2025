@@ -84,7 +84,7 @@ const RssFeed = () => {
       try {
         const results = await Promise.all(
           FEEDS.filter((f) => selectedFeeds.includes(f.key)).map((feed) =>
-            fetch(`http://localhost:8000${feed.url}`).then((res) => res.json())
+            fetch(`http://api.ucsc.info${feed.url}`).then((res) => res.json())
           )
         );
 
