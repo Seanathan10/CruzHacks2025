@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import {Link} from "react-router-dom";
 
 export default function TopBarButton({children}: {children: string}) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     return (
         <Link to={`/${children}`} style={{textDecoration: 'none'}}>{children}</Link>
         // <a href='.' onClick={() => {
